@@ -1,0 +1,7 @@
+export const ACCOUNT_SECTIONS = {
+  PROFILE: "PROFILE",
+  BILLING: "BILLING",
+  PRICING: "PRICING",
+  HELP: "HELP",
+  LOGOUT: "LOGOUT",
+};
