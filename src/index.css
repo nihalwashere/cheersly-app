@@ -56,3 +56,49 @@ body {
 .cursor-not-allowed {
   cursor: not-allowed;
 }
+
+.filter-label-text {
+  font-family: Product Sans;
+  margin: 0.2%;
+}
+
+.input-select-field {
+  width: 300px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: solid 0.5px #cbcbcb;
+  font-size: 16px;
+  padding: 10px 26px 10px 12px;
+}
+
+.input-select-field .MuiInputBase-root {
+  height: 45px;
+  font-family: Product Sans;
+  color: #ff8c00;
+}
+
+.input-select-field .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-radius: 4px;
+  border-color: #ff8c00;
+}
+
+.short-input-text-field {
+  width: 300px;
+}
+
+.input-text-field {
+  height: 45px;
+  border-radius: 4px;
+  border: "solid 0.5px #cbcbcb";
+  background-color: "#ffffff";
+}
+
+.input-text-field .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: #ff8c00;
+}
+
+.input-text-field .MuiOutlinedInput-input {
+  height: 10px;
+  font-family: Product Sans;
+  color: #ff8c00;
+}

@@ -1,0 +1,48 @@
+.leaderboard-root-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.leaderboard-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 60%;
+}
+
+.leaderboard-filters-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.leader-name-container {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.leader-name {
+  margin-left: 5%;
+}
+
+.leader-stats {
+  font-weight: 600;
+}
+
+.no-cheers-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Product Sans;
+  font-size: 24px;
+  margin: 2%;
+  font-weight: 900;
+}
+
+.leaderboard-spinner {
+  display: flex;
+  justify-content: center;
+}

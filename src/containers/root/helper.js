@@ -4,8 +4,6 @@ import {
 } from "../../enums/navigationRoutes";
 
 export const resolveRoute = (path) => {
-  console.log("path : ", path);
-
   const mapper = {
     [NAVIGATION_ROUTES.DASHBOARD]: () => NAVIGATION_SECTION.DASHBOARD,
   };

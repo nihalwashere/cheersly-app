@@ -1,6 +1,6 @@
 .profile-side-bar-top-container {
   background-color: #ffffff;
-  margin-top: 20%;
+  margin-top: 10%;
   margin-bottom: 20%;
 }
 
@@ -14,83 +14,37 @@
   line-height: 1.25;
   letter-spacing: normal;
   text-align: center;
-  color: #68019c;
+  color: #ff8c00;
   margin-top: 20px;
 }
 
-.profile-side-bar-renew-time {
-  width: 150px;
-  display: inline-flex;
+.profile-side-bar-stats-container {
+  display: flex;
+  justify-content: space-around;
   align-items: center;
+  margin-top: 15%;
+}
+
+.profile-side-bar-stat {
+  display: flex;
   justify-content: center;
-  height: 34px;
-  border-radius: 4px;
-  background-color: #e3e3e3;
-  margin-top: 16px;
-  text-align-last: center;
-}
-
-.profile-side-bar-renew-name {
-  height: 15px;
+  align-items: center;
+  flex-direction: column;
   font-family: Product Sans;
-  font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.25;
-  letter-spacing: normal;
-  text-align: left;
-  color: #464444;
-  margin-left: 10px;
 }
 
-.profile-side-bar-backtest-deploy-info-container {
-  height: 87px;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  background-color: #fbfbfb;
-  margin-top: 12px;
+.profile-side-bar-stat-count {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 5px;
+  color: #ff8c00;
 }
 
 .profile-side-bar-center-bar {
   width: 3px;
-  height: 37px;
+  height: 50px;
   border-radius: 2px;
-  background-color: #cbcbcb;
-}
-
-.profile-side-bar-backtest-deploy-count-container {
-  width: 40%;
-  font-family: Product Sans;
-  font-size: 24px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.25;
-  letter-spacing: normal;
-  text-align: center;
-  color: #051961;
-}
-
-.profile-side-bar-backtest-text {
-  font-size: 16px;
-  color: #464444;
-}
-
-.profile-side-bar-backtest-highlighted text {
-  font-size: 18px;
-  color: #464444;
-}
-
-.profile-side-bar-backtest-text {
-  font-family: Product Sans;
-  font-size: 12px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 2.42;
-  letter-spacing: normal;
-  text-align: center;
-  color: #707070;
+  background-color: #ff8c00;
 }
 
 .profile-side-bar-navigation-list-item {

@@ -4,10 +4,11 @@ import { resetInitialAuthState, setCurrentUser } from "./actions";
 import {
   resetInitialRootState,
   setSelectedNavSectionAction,
+  getCheersStatSagaAction,
 } from "../../root/state/actions"; // root actions
 import { resetInitialDashboardState } from "../../dashboard/state/actions"; // dashboard actions
 import { resetInitialAccountState } from "../../account/state/actions"; // account actions
-import { authorizeSlack, validateToken } from "../../../api";
+import { authorizeSlack, validateToken } from "../../../graphql/api";
 import {
   SLACK_CLIENT_ID,
   SLACK_CLIENT_SECRET,
@@ -52,6 +53,7 @@ function* authorizeHandler(action) {
             })
           ),
           yield put(setSelectedNavSectionAction(NAVIGATION_SECTION.DASHBOARD)),
+          yield put(getCheersStatSagaAction()),
         ]);
 
         action.history.push("/dashboard");
@@ -89,6 +91,7 @@ function* validateTokenHandler() {
         yield put(
           setSelectedNavSectionAction(resolveRoute(window.location.pathname))
         ),
+        yield put(getCheersStatSagaAction()),
       ]);
     } else {
       localStorage.removeItem(CHEERSLY_TOKEN);

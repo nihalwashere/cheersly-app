@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProfileSideBar = (props) => {
-  const { userName, handleClose, avatar } = props;
+  const { userName, handleClose, avatar, cheersGiven, cheersReceived } = props;
 
   const classes = useStyles();
 
@@ -64,6 +64,20 @@ const ProfileSideBar = (props) => {
       <div className="profile-side-bar-top-container">
         <Avatar alt={userName} src={avatar} className={classes.large} />
         <div className="profile-side-bar-name-text">{userName}</div>
+
+        <div className="profile-side-bar-stats-container">
+          <div className="profile-side-bar-stat">
+            <span>Cheers Given</span>
+            <span className="profile-side-bar-stat-count">{cheersGiven}</span>
+          </div>
+          <div className="profile-side-bar-center-bar" />
+          <div className="profile-side-bar-stat">
+            <span>Cheers Received</span>
+            <span className="profile-side-bar-stat-count">
+              {cheersReceived}
+            </span>
+          </div>
+        </div>
       </div>
 
       <>
@@ -104,6 +118,8 @@ ProfileSideBar.propTypes = {
   handleClose: PropTypes.func.isRequired,
   userName: PropTypes.string.isRequired,
   avatar: PropTypes.string,
+  cheersGiven: PropTypes.number.isRequired,
+  cheersReceived: PropTypes.number.isRequired,
 };
 
 export default ProfileSideBar;

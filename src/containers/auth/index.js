@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Spinner from "../../components/Spinner";
 import { authorizeSagaAction } from "./state/actions";
 import "./styles.css";
 
@@ -33,7 +33,7 @@ const AuthContainer = (props) => {
 
   return (
     <div className="auth-container">
-      <CircularProgress />
+      <Spinner />
     </div>
   );
 };

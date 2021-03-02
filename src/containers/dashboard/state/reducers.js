@@ -3,11 +3,13 @@ import {
   SET_SELECTED_SECTION_FOR_DASHBOARD,
   SET_DASHBOARD_IS_LOADING,
   RESET_INITIAL_DASHBOARD_STATE,
+  SET_LEADERBOARD_LIST,
 } from "./types";
 
 const initialState = {
   selectedSection: DASHBOARD_SECTIONS.OVERVIEW,
   isLoading: false,
+  leaderBoard: [],
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -20,6 +22,9 @@ export const dashboardReducer = (state = initialState, action) => {
 
     case RESET_INITIAL_DASHBOARD_STATE:
       return { ...initialState };
+
+    case SET_LEADERBOARD_LIST:
+      return { ...state, leaderBoard: action.payload };
 
     default:
       return { ...state };

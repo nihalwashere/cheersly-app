@@ -7,7 +7,6 @@ import {
   Redirect,
 } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import ProtectedRoute from "../../components/ProtectedRoute";
 import PageNotFound from "../../components/PageNotFound";
 import AuthContainer from "../auth";
@@ -21,6 +20,7 @@ import AccountContainer from "../account";
 // import SubscriptionExpiredContainer from "../subscription-expired";
 import NavBar from "../../components/NavBar";
 import ProfileSideBar from "../../components/ProfileSideBar";
+import Spinner from "../../components/Spinner";
 import { CHEERSLY_TOKEN } from "../../utils/constants";
 import { setSelectedNavSectionAction } from "./state/actions";
 import { NAVIGATION_SECTION } from "../../enums/navigationRoutes";
@@ -30,6 +30,10 @@ const RootContainer = () => {
   const dispatch = useDispatch();
 
   const { isLoggedIn, slackUserData } = useSelector((state) => state.auth);
+
+  const {
+    cheersStat: { cheersGiven, cheersReceived },
+  } = useSelector((state) => state.root);
 
   const { selectedNavSection } = useSelector((state) => state.root);
 
@@ -41,10 +45,8 @@ const RootContainer = () => {
       : "";
 
   const avatar =
-    slackUserData &&
-    slackUserData.profile &&
-    slackUserData.profile.image_original
-      ? slackUserData.profile.image_original
+    slackUserData && slackUserData.profile && slackUserData.profile.image_192
+      ? slackUserData.profile.image_192
       : "";
 
   const handleNavigationSectionChange = (section) => {
@@ -71,7 +73,7 @@ const RootContainer = () => {
 
       {localStorage.getItem(CHEERSLY_TOKEN) && !isLoggedIn ? (
         <div className="loader-container">
-          <CircularProgress />
+          <Spinner />
         </div>
       ) : (
         <div>
@@ -84,6 +86,8 @@ const RootContainer = () => {
               handleClose={handleProfileSidebarClose}
               userName={userName}
               avatar={avatar}
+              cheersGiven={cheersGiven}
+              cheersReceived={cheersReceived}
             />
           </Drawer>
 

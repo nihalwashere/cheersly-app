@@ -1,5 +1,4 @@
 import React from "react";
-// import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import Link from "@material-ui/core/Link";
@@ -13,7 +12,6 @@ import {
 import "./styles.css";
 
 const NavBar = (props) => {
-  // const dispatch = useDispatch();
   const history = useHistory();
 
   const { selectedSection, setSelectedSection, userName } = props;
@@ -25,14 +23,6 @@ const NavBar = (props) => {
       history.push(NAVIGATION_ROUTES.DASHBOARD);
     }
 
-    if (section === NAVIGATION_SECTION.OPEN_PULL_REQUESTS) {
-      history.push(NAVIGATION_ROUTES.OPEN_PULL_REQUESTS);
-    }
-
-    if (section === NAVIGATION_SECTION.TOP_CONTRIBUTORS) {
-      history.push(NAVIGATION_ROUTES.TOP_CONTRIBUTORS);
-    }
-
     if (section === NAVIGATION_SECTION.PROFILE_SIDEBAR) {
       //
     }
@@ -40,7 +30,7 @@ const NavBar = (props) => {
 
   return (
     <div className="navbar-container">
-      <div className="navbar-logo-text">CodeKickBot</div>
+      <div className="navbar-logo-text">Cheersly</div>
 
       <div className="nav-actions-container">
         <div>
@@ -58,47 +48,7 @@ const NavBar = (props) => {
                   : "nav-action"
               }
             >
-              Dashboard
-            </div>
-          </Link>
-
-          {/* eslint-disable-next-line */}
-          <Link
-            underline="none"
-            color="inherit"
-            component="button"
-            onClick={() =>
-              handleNavigation(NAVIGATION_SECTION.OPEN_PULL_REQUESTS)
-            }
-          >
-            <div
-              className={
-                selectedSection === NAVIGATION_SECTION.OPEN_PULL_REQUESTS
-                  ? "nav-action navbar-selected-section"
-                  : "nav-action"
-              }
-            >
-              Open Pull Requests
-            </div>
-          </Link>
-
-          {/* eslint-disable-next-line */}
-          <Link
-            underline="none"
-            color="inherit"
-            component="button"
-            onClick={() =>
-              handleNavigation(NAVIGATION_SECTION.TOP_CONTRIBUTORS)
-            }
-          >
-            <div
-              className={
-                selectedSection === NAVIGATION_SECTION.TOP_CONTRIBUTORS
-                  ? "nav-action navbar-selected-section"
-                  : "nav-action"
-              }
-            >
-              Top Contributors
+              Leaderboard
             </div>
           </Link>
         </div>

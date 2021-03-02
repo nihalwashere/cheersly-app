@@ -1,9 +1,9 @@
-// import { CODEKICKBOT_TOKEN } from "./constants";
+import { CHEERSLY_TOKEN } from "./constants";
 
-// export const getDefaultHeaders = () => {
-//   const token = localStorage.getItem(CODEKICKBOT_TOKEN);
+export const getDefaultHeaders = () => {
+  const token = localStorage.getItem(CHEERSLY_TOKEN);
 
-//   return {
-//     "x-access-token": token,
-//   };
-// };
+  return {
+    "x-access-token": token,
+  };
+};

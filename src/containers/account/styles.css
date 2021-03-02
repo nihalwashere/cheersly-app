@@ -35,7 +35,7 @@
   border-radius: 2px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
-  border-right: 4px solid #68019c;
+  border-right: 4px solid #f3de19;
   box-sizing: border-box;
 }
 
@@ -63,7 +63,7 @@
   line-height: 1.25;
   letter-spacing: normal;
   text-align: left;
-  /* color: #68019c; */
+  /* color: #F3DE19; */
 }
 
 .account-section-tab-title-selected {
