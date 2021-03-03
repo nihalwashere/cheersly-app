@@ -15,7 +15,12 @@ const AuthContainer = (props) => {
   } = history;
 
   useEffect(() => {
+    if (String(search).includes("error")) {
+      history.push("/login");
+    }
+
     const codeAndState = search.split("=")[1];
+
     if (codeAndState) {
       const code = codeAndState.split("&")[0];
 
