@@ -11,7 +11,7 @@ const LoginContainer = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   if (isLoggedIn) {
-    history.push("/dashboard");
+    history.push("/leaderboard");
   }
 
   return (

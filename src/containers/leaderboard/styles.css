@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 60%;
+  width: 80%;
 }
 
 .leaderboard-filters-container {
@@ -32,7 +32,7 @@
   font-weight: 600;
 }
 
-.no-cheers-text {
+.leaderboard-no-cheers-text {
   display: flex;
   justify-content: center;
   align-items: center;

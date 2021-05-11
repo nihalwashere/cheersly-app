@@ -6,7 +6,7 @@ import {
   setSelectedNavSectionAction,
   getCheersStatSagaAction,
 } from "../../root/state/actions"; // root actions
-import { resetInitialDashboardState } from "../../dashboard/state/actions"; // dashboard actions
+import { resetInitialLeaderboardState } from "../../leaderboard/state/actions"; // leaderboard actions
 import { resetInitialAccountState } from "../../account/state/actions"; // account actions
 import { authorizeSlack, validateToken } from "../../../graphql/api";
 import {
@@ -52,11 +52,13 @@ function* authorizeHandler(action) {
               isLoggedIn: true,
             })
           ),
-          yield put(setSelectedNavSectionAction(NAVIGATION_SECTION.DASHBOARD)),
+          yield put(
+            setSelectedNavSectionAction(NAVIGATION_SECTION.LEADERBOARD)
+          ),
           yield put(getCheersStatSagaAction()),
         ]);
 
-        action.history.push("/dashboard");
+        action.history.push("/leaderboard");
       } else {
         localStorage.removeItem(CHEERSLY_TOKEN);
         window.location.href = "/login";
@@ -110,7 +112,7 @@ function* logoutHandler(action) {
       yield put(resetInitialAuthState()), // flush auth state
       yield put(resetInitialRootState()), // flush root state
       yield put(resetInitialAccountState()), // flush account state
-      yield put(resetInitialDashboardState()), // flush dashboard state
+      yield put(resetInitialLeaderboardState()), // flush leaderboard state
     ]);
 
     action.history.push("/login");

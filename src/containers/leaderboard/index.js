@@ -47,7 +47,7 @@ const useStyles = makeStyles({
   },
 });
 
-const DashboardContainer = () => {
+const LeaderboardContainer = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -88,7 +88,7 @@ const DashboardContainer = () => {
     );
   }, [type, duration, page, rowsPerPage]);
 
-  const { leaderBoard, isLoading } = useSelector((state) => state.dashboard);
+  const { leaderBoard, isLoading } = useSelector((state) => state.leaderboard);
 
   return (
     <div className="leaderboard-root-container">
@@ -213,8 +213,8 @@ const DashboardContainer = () => {
             </TableContainer>
 
             {!leaderBoard.length && !isLoading && (
-              <div className="no-cheers-text">
-                OMG, no cheers shared during this period!
+              <div className="leaderboard-no-cheers-text">
+                No cheers shared during this period!
               </div>
             )}
           </div>
@@ -224,4 +224,4 @@ const DashboardContainer = () => {
   );
 };
 
-export default DashboardContainer;
+export default LeaderboardContainer;

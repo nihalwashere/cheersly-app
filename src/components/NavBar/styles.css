@@ -38,6 +38,13 @@
   font-weight: 600;
 }
 
+.navbar-left-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60%;
+}
+
 .navbar-right-section {
   display: flex;
   justify-content: flex-end;

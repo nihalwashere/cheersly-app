@@ -5,7 +5,12 @@ import {
   SLACK_API,
 } from "../utils/config";
 import { getDefaultHeaders } from "../utils/common";
-import { getLeaderBoardListQuery, getCheersStatQuery } from "./queries";
+import { LeaderBoardList, CheersStat, CompanyValuesList } from "./queries";
+import {
+  CreateCompanyValues,
+  UpdateCompanyValues,
+  DeleteCompanyValues,
+} from "./mutations";
 
 export const authorizeSlack = async (details) => {
   try {
@@ -60,7 +65,7 @@ export const getLeaderBoardList = async ({
     const headers = getDefaultHeaders();
 
     const data = {
-      query: getLeaderBoardListQuery,
+      query: LeaderBoardList,
       variables: { pageIndex, pageSize, type, duration },
     };
 
@@ -79,8 +84,84 @@ export const getCheersStat = async () => {
     const headers = getDefaultHeaders();
 
     const data = {
-      query: getCheersStatQuery,
+      query: CheersStat,
       variables: {},
+    };
+
+    const response = await axios.post(CHEERSLY_GRAPHQL_BASE_URL, data, {
+      headers,
+    });
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCompanyValuesList = async () => {
+  try {
+    const headers = getDefaultHeaders();
+
+    const data = {
+      query: CompanyValuesList,
+      variables: {},
+    };
+
+    const response = await axios.post(CHEERSLY_GRAPHQL_BASE_URL, data, {
+      headers,
+    });
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const createCompanyValues = async (payload) => {
+  try {
+    const headers = getDefaultHeaders();
+
+    const data = {
+      query: CreateCompanyValues,
+      variables: { ...payload },
+    };
+
+    const response = await axios.post(CHEERSLY_GRAPHQL_BASE_URL, data, {
+      headers,
+    });
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateCompanyValues = async (payload) => {
+  try {
+    const headers = getDefaultHeaders();
+
+    const data = {
+      query: UpdateCompanyValues,
+      variables: { ...payload },
+    };
+
+    const response = await axios.post(CHEERSLY_GRAPHQL_BASE_URL, data, {
+      headers,
+    });
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteCompanyValues = async (payload) => {
+  try {
+    const headers = getDefaultHeaders();
+
+    const data = {
+      query: DeleteCompanyValues,
+      variables: { ...payload },
     };
 
     const response = await axios.post(CHEERSLY_GRAPHQL_BASE_URL, data, {

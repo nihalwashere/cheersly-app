@@ -12,7 +12,8 @@ import PageNotFound from "../../components/PageNotFound";
 import AuthContainer from "../auth";
 import LoginContainer from "../auth/login";
 // import SubscriptionContainer from "../account/subscription";
-import DashboardContainer from "../dashboard";
+import LeaderboardContainer from "../leaderboard";
+import CompanyValuesContainer from "../company-values";
 import AccountContainer from "../account";
 // import ProfileContainer from "../account/profile";
 // import SettingsContainer from "../settings";
@@ -104,9 +105,16 @@ const RootContainer = () => {
 
             <ProtectedRoute
               exact
-              path="/dashboard"
+              path="/leaderboard"
               isLoggedIn={isLoggedIn}
-              component={DashboardContainer}
+              component={LeaderboardContainer}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/company-values"
+              isLoggedIn={isLoggedIn}
+              component={CompanyValuesContainer}
             />
 
             <ProtectedRoute

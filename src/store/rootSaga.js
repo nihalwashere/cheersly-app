@@ -1,14 +1,16 @@
 import { all } from "redux-saga/effects";
-import authSaga from "../containers/auth/state/sagas";
-import dashboardSaga from "../containers/dashboard/state/sagas";
 import rootContainer from "../containers/root/state/sagas";
+import authSaga from "../containers/auth/state/sagas";
+import leaderboardSaga from "../containers/leaderboard/state/sagas";
+import companyValuesSaga from "../containers/company-values/state/sagas";
 // import accountSaga from "../containers/account/state/sagas";
 
 export default function* rootSaga() {
   yield all([
-    authSaga(),
-    dashboardSaga(),
     rootContainer(),
+    authSaga(),
+    leaderboardSaga(),
+    companyValuesSaga(),
     // accountSaga()
   ]);
 }

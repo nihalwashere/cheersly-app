@@ -19,8 +19,12 @@ const NavBar = (props) => {
   const handleNavigation = (section) => {
     setSelectedSection(section);
 
-    if (section === NAVIGATION_SECTION.DASHBOARD) {
-      history.push(NAVIGATION_ROUTES.DASHBOARD);
+    if (section === NAVIGATION_SECTION.LEADERBOARD) {
+      history.push(NAVIGATION_ROUTES.LEADERBOARD);
+    }
+
+    if (section === NAVIGATION_SECTION.COMPANY_VALUES) {
+      history.push(NAVIGATION_ROUTES.COMPANY_VALUES);
     }
 
     if (section === NAVIGATION_SECTION.PROFILE_SIDEBAR) {
@@ -33,24 +37,48 @@ const NavBar = (props) => {
       <div className="navbar-logo-text">Cheersly</div>
 
       <div className="nav-actions-container">
-        <div>
-          {/* eslint-disable-next-line */}
-          <Link
-            underline="none"
-            color="inherit"
-            component="button"
-            onClick={() => handleNavigation(NAVIGATION_SECTION.DASHBOARD)}
-          >
-            <div
-              className={
-                selectedSection === NAVIGATION_SECTION.DASHBOARD
-                  ? "nav-action navbar-selected-section"
-                  : "nav-action"
+        <div className="navbar-left-section">
+          <div>
+            {/* eslint-disable-next-line */}
+            <Link
+              underline="none"
+              color="inherit"
+              component="button"
+              onClick={() => handleNavigation(NAVIGATION_SECTION.LEADERBOARD)}
+            >
+              <div
+                className={
+                  selectedSection === NAVIGATION_SECTION.LEADERBOARD
+                    ? "nav-action navbar-selected-section"
+                    : "nav-action"
+                }
+              >
+                Leaderboard
+              </div>
+            </Link>
+          </div>
+
+          <div>
+            {/* eslint-disable-next-line */}
+            <Link
+              underline="none"
+              color="inherit"
+              component="button"
+              onClick={() =>
+                handleNavigation(NAVIGATION_SECTION.COMPANY_VALUES)
               }
             >
-              Leaderboard
-            </div>
-          </Link>
+              <div
+                className={
+                  selectedSection === NAVIGATION_SECTION.COMPANY_VALUES
+                    ? "nav-action navbar-selected-section"
+                    : "nav-action"
+                }
+              >
+                Company Values
+              </div>
+            </Link>
+          </div>
         </div>
 
         <div className="navbar-right-section">
