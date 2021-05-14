@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   selectedNavSection: "",
-  cheersStat: { cheersGiven: 0, cheersReceived: 0 },
+  cheersStat: { cheersGiven: 0, cheersReceived: 0, cheersRedeemable: 0 },
 };
 
 export const rootContainerReducer = (state = initialState, action) => {

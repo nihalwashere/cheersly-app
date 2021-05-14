@@ -11,10 +11,12 @@ import ProtectedRoute from "../../components/ProtectedRoute";
 import PageNotFound from "../../components/PageNotFound";
 import AuthContainer from "../auth";
 import LoginContainer from "../auth/login";
-// import SubscriptionContainer from "../account/subscription";
+import AccountContainer from "../account";
+import AdminSettingsContainer from "../admin-settings";
 import LeaderboardContainer from "../leaderboard";
 import CompanyValuesContainer from "../company-values";
-import AccountContainer from "../account";
+import RewardsContainer from "../rewards";
+// import SubscriptionContainer from "../account/subscription";
 // import ProfileContainer from "../account/profile";
 // import SettingsContainer from "../settings";
 // import TrialExpiredContainer from "../trial-expired";
@@ -30,10 +32,12 @@ import "./styles.css";
 const RootContainer = () => {
   const dispatch = useDispatch();
 
-  const { isLoggedIn, slackUserData } = useSelector((state) => state.auth);
+  const { isLoggedIn, slackUserData, role } = useSelector(
+    (state) => state.auth
+  );
 
   const {
-    cheersStat: { cheersGiven, cheersReceived },
+    cheersStat: { cheersGiven, cheersReceived, cheersRedeemable },
   } = useSelector((state) => state.root);
 
   const { selectedNavSection } = useSelector((state) => state.root);
@@ -89,12 +93,28 @@ const RootContainer = () => {
               avatar={avatar}
               cheersGiven={cheersGiven}
               cheersReceived={cheersReceived}
+              cheersRedeemable={cheersRedeemable}
+              role={role}
             />
           </Drawer>
 
           <Switch>
             <Route exact path="/login" component={LoginContainer} />
             <Route exact path="/auth" component={AuthContainer} />
+
+            <ProtectedRoute
+              exact
+              path="/account"
+              isLoggedIn={isLoggedIn}
+              component={AccountContainer}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/admin-settings"
+              isLoggedIn={isLoggedIn}
+              component={AdminSettingsContainer}
+            />
 
             {/* <ProtectedRoute
               exact
@@ -114,14 +134,16 @@ const RootContainer = () => {
               exact
               path="/company-values"
               isLoggedIn={isLoggedIn}
-              component={CompanyValuesContainer}
+              render={(props) => (
+                <CompanyValuesContainer {...props} role={role} />
+              )}
             />
 
             <ProtectedRoute
               exact
-              path="/account"
+              path="/rewards"
               isLoggedIn={isLoggedIn}
-              component={AccountContainer}
+              render={(props) => <RewardsContainer {...props} role={role} />}
             />
 
             {/*                          

@@ -5,7 +5,7 @@ import {
 } from "./types";
 
 const initialState = {
-  selectedSection: ACCOUNT_SECTIONS.CONNECTED_ACCOUNTS,
+  selectedSection: ACCOUNT_SECTIONS.PROFILE,
 };
 
 export const accountReducer = (state = initialState, action) => {

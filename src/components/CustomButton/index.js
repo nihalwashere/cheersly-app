@@ -11,3 +11,25 @@ export const PrimaryButton = withStyles(() => ({
     },
   },
 }))(Button);
+
+export const SecondaryButton = withStyles(() => ({
+  root: {
+    color: "#ffffff",
+    fontFamily: "Product Sans",
+    backgroundColor: "#6A5ACD",
+    "&:hover": {
+      backgroundColor: "#6a5acdd4",
+    },
+  },
+}))(Button);
+
+export const DangerButton = withStyles(() => ({
+  root: {
+    color: "#ffffff",
+    fontFamily: "Product Sans",
+    backgroundColor: "#EE3B3B",
+    "&:hover": {
+      backgroundColor: "#ee3b3bcc",
+    },
+  },
+}))(Button);

@@ -1,12 +1,14 @@
 import { RESET_INITIAL_AUTH_STATE, SET_CURRENT_USER } from "./types";
 
 const initialState = {
+  userId: "",
   slackUserId: "",
   slackTeamId: "",
   slackInstallation: {},
   slackUserData: {
     profile: {},
   },
+  role: "",
   isLoggedIn: false,
 };
 

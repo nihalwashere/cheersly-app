@@ -30,6 +30,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   font-family: Product Sans;
 }
 
@@ -45,6 +46,24 @@
   height: 50px;
   border-radius: 2px;
   background-color: #ff8c00;
+}
+
+.profile-side-bar-cheers-redeemable-stat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  font-family: Product Sans;
+
+  margin-top: 20px;
+}
+
+.profile-side-bar-cheers-redeemable-stat-count {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 5px;
+  color: #ff8c00;
 }
 
 .profile-side-bar-navigation-list-item {

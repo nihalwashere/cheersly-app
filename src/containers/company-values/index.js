@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -13,9 +14,12 @@ import {
   updateCompanyValuesSagaAction,
   deleteCompanyValuesSagaAction,
 } from "./state/actions";
+import { USER_ROLE } from "../../enums/userRoles";
 import "./styles.css";
 
-const CompanyValuesContainer = () => {
+const CompanyValuesContainer = (props) => {
+  const { role } = props;
+
   const dispatch = useDispatch();
 
   const { companyValues, isLoading } = useSelector(
@@ -103,35 +107,41 @@ const CompanyValuesContainer = () => {
           </div>
         ) : (
           <div>
-            <div className="company-values-create-button-container">
-              <PrimaryButton onClick={handleCompanyValuesCreate}>
-                Create
-              </PrimaryButton>
-            </div>
+            {role === USER_ROLE.ADMIN && (
+              <div className="company-values-create-button-container">
+                <PrimaryButton onClick={handleCompanyValuesCreate}>
+                  Create
+                </PrimaryButton>
+              </div>
+            )}
 
             <div className="company-values-card-container">
               {companyValues.map((companyValue) => (
-                <div className="company-values-card">
+                <div className="company-values-card" key={companyValue.id}>
                   <div className="company-values-card-title-actions-container">
                     <div className="company-values-card-title">
                       {companyValue.title}
                     </div>
 
-                    <div className="company-values-card-actions-container">
-                      <IconButton
-                        onClick={() => handleCompanyValuesUpdate(companyValue)}
-                      >
-                        <EditIcon />
-                      </IconButton>
+                    {role === USER_ROLE.ADMIN && (
+                      <div className="company-values-card-actions-container">
+                        <IconButton
+                          onClick={() =>
+                            handleCompanyValuesUpdate(companyValue)
+                          }
+                        >
+                          <EditIcon />
+                        </IconButton>
 
-                      <IconButton
-                        onClick={() =>
-                          handleCompanyValuesDelete(companyValue.id)
-                        }
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </div>
+                        <IconButton
+                          onClick={() =>
+                            handleCompanyValuesDelete(companyValue.id)
+                          }
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </div>
+                    )}
                   </div>
 
                   <div className="company-values-card-description">
@@ -169,6 +179,10 @@ const CompanyValuesContainer = () => {
       </div>
     </div>
   );
+};
+
+CompanyValuesContainer.propTypes = {
+  role: PropTypes.string.isRequired,
 };
 
 export default CompanyValuesContainer;

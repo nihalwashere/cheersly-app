@@ -1,0 +1,60 @@
+.rewards-overview-create-button-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.rewards-overview-card-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.rewards-overview-card {
+  height: auto;
+  width: 70%;
+
+  border: solid 0.5px #cbcbcb;
+  border-radius: 5px;
+
+  padding: 1%;
+
+  margin-bottom: 2%;
+}
+
+.rewards-overview-card-title-actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rewards-overview-card-title {
+  font-family: Product Sans;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.rewards-overview-card-description {
+  font-family: Product Sans;
+  font-size: 16px;
+
+  margin-top: 5px;
+}
+
+.rewards-overview-card-price {
+  font-family: Product Sans;
+  font-size: 28px;
+  font-weight: bold;
+
+  color: #ff8c00;
+
+  margin-top: 20px;
+}
+
+.rewards-overview-card-price-redeem-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

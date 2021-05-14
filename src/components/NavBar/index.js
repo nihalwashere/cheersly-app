@@ -27,6 +27,10 @@ const NavBar = (props) => {
       history.push(NAVIGATION_ROUTES.COMPANY_VALUES);
     }
 
+    if (section === NAVIGATION_SECTION.REWARDS) {
+      history.push(NAVIGATION_ROUTES.REWARDS);
+    }
+
     if (section === NAVIGATION_SECTION.PROFILE_SIDEBAR) {
       //
     }
@@ -76,6 +80,26 @@ const NavBar = (props) => {
                 }
               >
                 Company Values
+              </div>
+            </Link>
+          </div>
+
+          <div>
+            {/* eslint-disable-next-line */}
+            <Link
+              underline="none"
+              color="inherit"
+              component="button"
+              onClick={() => handleNavigation(NAVIGATION_SECTION.REWARDS)}
+            >
+              <div
+                className={
+                  selectedSection === NAVIGATION_SECTION.REWARDS
+                    ? "nav-action navbar-selected-section"
+                    : "nav-action"
+                }
+              >
+                Rewards
               </div>
             </Link>
           </div>

@@ -1,0 +1,38 @@
+.admin-settings-root-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.admin-settings-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 60%;
+}
+
+.admin-settings-filters-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.admin-name-container {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.admin-name {
+  margin-left: 5%;
+}
+
+.admin-status {
+  font-weight: 600;
+}
+
+.admin-settings-spinner {
+  display: flex;
+  justify-content: center;
+}

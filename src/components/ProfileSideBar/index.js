@@ -14,6 +14,7 @@ import { setSelectedNavSectionAction } from "../../containers/root/state/actions
 import { NAVIGATION_SECTION } from "../../enums/navigationRoutes";
 import { ACCOUNT_SECTIONS } from "../../enums/accountSections";
 import "./styles.css";
+import { USER_ROLE } from "../../enums/userRoles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProfileSideBar = (props) => {
-  const { userName, handleClose, avatar, cheersGiven, cheersReceived } = props;
+  const {
+    userName,
+    handleClose,
+    avatar,
+    cheersGiven,
+    cheersReceived,
+    cheersRedeemable,
+    role,
+  } = props;
 
   const classes = useStyles();
 
@@ -40,19 +49,10 @@ const ProfileSideBar = (props) => {
   const handleNavigation = (navigationItem) => {
     handleClose();
 
-    const { section } = navigationItem;
+    const { route } = navigationItem;
 
-    if (navigationItem.route && section) {
-      // dispatch(setSelectedSectionForAccount(section)); // set account section
-
-      if (section === ACCOUNT_SECTIONS.HELP) {
-        dispatch(setSelectedNavSectionAction(NAVIGATION_SECTION.HELP));
-      } else {
-        dispatch(
-          setSelectedNavSectionAction(NAVIGATION_SECTION.PROFILE_SIDEBAR)
-        );
-      }
-
+    if (route) {
+      dispatch(setSelectedNavSectionAction(NAVIGATION_SECTION.PROFILE_SIDEBAR));
       history.push(navigationItem.route);
     } else {
       dispatch(logoutSagaAction(history));
@@ -70,7 +70,7 @@ const ProfileSideBar = (props) => {
             <span>Cheers Given</span>
             <span className="profile-side-bar-stat-count">{cheersGiven}</span>
           </div>
-          <div className="profile-side-bar-center-bar" />
+          {/* <div className="profile-side-bar-center-bar" /> */}
           <div className="profile-side-bar-stat">
             <span>Cheers Received</span>
             <span className="profile-side-bar-stat-count">
@@ -78,37 +78,74 @@ const ProfileSideBar = (props) => {
             </span>
           </div>
         </div>
+
+        <div className="profile-side-bar-cheers-redeemable-stat">
+          <span>Cheers Redeemable</span>
+          <span className="profile-side-bar-cheers-redeemable-stat-count">
+            {cheersRedeemable}
+          </span>
+        </div>
       </div>
 
       <>
-        {profileSideBarNavigationTabs.map((navigationItem) => (
-          <div>
-            <div
-              className="profile-side-bar-navigation-list-item"
-              onClick={() => handleNavigation(navigationItem)}
-            >
-              <div className="profile-side-bar-navigation-list-item-img-text-container">
-                <img
-                  src={navigationItem.icon}
-                  alt="account"
-                  className="profile-side-bar-navigation-list-item-img"
-                />
+        {profileSideBarNavigationTabs.map((navigationItem) =>
+          !navigationItem.admittedRole ? (
+            <div key={navigationItem.id}>
+              <div
+                className="profile-side-bar-navigation-list-item"
+                onClick={() => handleNavigation(navigationItem)}
+              >
+                <div className="profile-side-bar-navigation-list-item-img-text-container">
+                  <img
+                    src={navigationItem.icon}
+                    alt="account"
+                    className="profile-side-bar-navigation-list-item-img"
+                  />
 
-                <span className="profile-side-bar-navigation-list-item-text">
-                  {navigationItem.text}
-                </span>
+                  <span className="profile-side-bar-navigation-list-item-text">
+                    {navigationItem.text}
+                  </span>
+                </div>
+
+                {navigationItem.shouldRenderRightArrowIcon && (
+                  <div className="profile-side-bar-navigation-list-right-arrow-img">
+                    <img src={ImageAssets.Right_Arrow_Icon} alt="more" />
+                  </div>
+                )}
               </div>
 
-              {navigationItem.shouldRenderRightArrowIcon && (
-                <div className="profile-side-bar-navigation-list-right-arrow-img">
-                  <img src={ImageAssets.Right_Arrow_Icon} alt="more" />
-                </div>
-              )}
+              <Divider />
             </div>
+          ) : navigationItem.admittedRole === USER_ROLE.ADMIN &&
+            role === USER_ROLE.ADMIN ? (
+            <div key={navigationItem.id}>
+              <div
+                className="profile-side-bar-navigation-list-item"
+                onClick={() => handleNavigation(navigationItem)}
+              >
+                <div className="profile-side-bar-navigation-list-item-img-text-container">
+                  <img
+                    src={navigationItem.icon}
+                    alt="account"
+                    className="profile-side-bar-navigation-list-item-img"
+                  />
 
-            <Divider />
-          </div>
-        ))}
+                  <span className="profile-side-bar-navigation-list-item-text">
+                    {navigationItem.text}
+                  </span>
+                </div>
+
+                {navigationItem.shouldRenderRightArrowIcon && (
+                  <div className="profile-side-bar-navigation-list-right-arrow-img">
+                    <img src={ImageAssets.Right_Arrow_Icon} alt="more" />
+                  </div>
+                )}
+              </div>
+
+              <Divider />
+            </div>
+          ) : null
+        )}
       </>
     </Paper>
   );
@@ -120,6 +157,8 @@ ProfileSideBar.propTypes = {
   avatar: PropTypes.string,
   cheersGiven: PropTypes.number.isRequired,
   cheersReceived: PropTypes.number.isRequired,
+  cheersRedeemable: PropTypes.number.isRequired,
+  role: PropTypes.string.isRequired,
 };
 
 export default ProfileSideBar;

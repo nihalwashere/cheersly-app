@@ -1,0 +1,15 @@
+.create-reward-description-count-container {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.create-reward-description-count {
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}

@@ -28,7 +28,12 @@ const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
+      <Typography
+        variant="h6"
+        style={{ fontFamily: "Product Sans", fontWeight: "bold" }}
+      >
+        {children}
+      </Typography>
       {onClose ? (
         <IconButton
           aria-label="close"
@@ -63,8 +68,8 @@ const DeleteCompanyValuesDialog = (props) => {
       <Dialog onClose={handleClose} open={open}>
         <DialogTitle onClose={handleClose}>Delete Company Value</DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Are you sure you want to remove this company value permanently?
+          <Typography gutterBottom style={{ fontFamily: "Product Sans" }}>
+            Are you sure you want to permanently remove this company value?
           </Typography>
         </DialogContent>
         <DialogActions>

@@ -8,6 +8,8 @@ import {
 } from "../../root/state/actions"; // root actions
 import { resetInitialLeaderboardState } from "../../leaderboard/state/actions"; // leaderboard actions
 import { resetInitialAccountState } from "../../account/state/actions"; // account actions
+import { resetInitialAdminSettingsState } from "../../admin-settings/state/actions"; // admin-settings actions
+import { resetInitialRewardsState } from "../../rewards/state/actions"; // reward actions
 import { authorizeSlack, validateToken } from "../../../graphql/api";
 import {
   SLACK_CLIENT_ID,
@@ -45,8 +47,10 @@ function* authorizeHandler(action) {
         yield all([
           yield put(
             setCurrentUser({
+              userId: res.userId,
               slackUserId: res.slackUserId,
               slackTeamId: res.slackTeamId,
+              role: res.role,
               slackInstallation: res.slackInstallation,
               slackUserData: res.slackUserData,
               isLoggedIn: true,
@@ -83,8 +87,10 @@ function* validateTokenHandler() {
       yield all([
         yield put(
           setCurrentUser({
+            userId: response.userId,
             slackUserId: response.slackUserId,
             slackTeamId: response.slackTeamId,
+            role: response.role,
             slackInstallation: response.slackInstallation,
             slackUserData: response.slackUserData,
             isLoggedIn: true,
@@ -113,6 +119,8 @@ function* logoutHandler(action) {
       yield put(resetInitialRootState()), // flush root state
       yield put(resetInitialAccountState()), // flush account state
       yield put(resetInitialLeaderboardState()), // flush leaderboard state
+      yield put(resetInitialAdminSettingsState()), // flush admin-settings state
+      yield put(resetInitialRewardsState()), // flush rewards state
     ]);
 
     action.history.push("/login");
