@@ -17,7 +17,7 @@ import {
   setRedemptionRequestsPageIndex,
   setRedemptionRequestsPageSize,
 } from "../state/actions";
-import { REDEMPTION_REQUEST_STATUS } from "../../../enums/redemptionRequestStatus";
+import { resolveRedemptionCreatedDaysOld } from "../../../utils/common";
 import "./styles.css";
 
 const RewardsRedemptionRequestsContainer = () => {
@@ -145,6 +145,11 @@ const RewardsRedemptionRequestsContainer = () => {
                   </div>
                   <div className="rewards-redemption-request-card-user-name">
                     {redemptionRequest.user.slackUserData.real_name}
+                  </div>
+                  <div className="rewards-redemption-request-card-created-at">
+                    {resolveRedemptionCreatedDaysOld(
+                      redemptionRequest.createdAt
+                    )}
                   </div>
                 </div>
 

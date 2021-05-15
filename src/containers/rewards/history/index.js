@@ -9,6 +9,10 @@ import {
   setSnackbarForRewardsHistory,
   setRewardsHistoryPageIndex,
 } from "../state/actions";
+import {
+  resolveRedemptionCreatedDaysOld,
+  resolveRedemptionUpdatedDaysOld,
+} from "../../../utils/common";
 import "./styles.css";
 
 const RewardsHistoryContainer = () => {
@@ -87,6 +91,22 @@ const RewardsHistoryContainer = () => {
                   </div>
                   <div className="rewards-history-card-user-name">
                     {rewardHistory.user.slackUserData.real_name}
+                  </div>
+                </div>
+
+                <div className="rewards-history-card-redemption-info">
+                  <div className="rewards-history-card-redemption-status">
+                    {rewardHistory.status}
+                  </div>
+
+                  <div className="rewards-history-card-redemption-created-at">
+                    {resolveRedemptionCreatedDaysOld(rewardHistory.createdAt)}
+                  </div>
+                  <div className="rewards-history-card-redemption-updated-at">
+                    {resolveRedemptionUpdatedDaysOld(
+                      rewardHistory.updatedAt,
+                      rewardHistory.status
+                    )}
                   </div>
                 </div>
               </div>

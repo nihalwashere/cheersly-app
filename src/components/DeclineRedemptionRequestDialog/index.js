@@ -71,8 +71,13 @@ const DeclineRedemptionRequestDialog = (props) => {
         </DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom style={{ fontFamily: "Product Sans" }}>
-            Are you sure you want to decline this redemption request and notify
-            user?
+            Are you sure you want to decline this redemption request?
+          </Typography>
+          <Typography
+            gutterBottom
+            style={{ fontFamily: "Product Sans", fontSize: 12 }}
+          >
+            Member would be notified in Slack.
           </Typography>
         </DialogContent>
         <DialogActions>

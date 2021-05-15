@@ -45,7 +45,15 @@
   font-size: 18px;
   font-weight: bold;
 
-  margin-top: 20px;
+  margin-top: 8px;
+}
+
+.rewards-redemption-request-card-created-at {
+  font-family: Product Sans;
+  font-size: 12px;
+  color: #464444;
+
+  margin-top: 8px;
 }
 
 .rewards-redemption-request-card-reward-title {

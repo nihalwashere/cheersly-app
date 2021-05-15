@@ -83,6 +83,8 @@ export const RedemptionRequestsList = `query RedemptionRequestList($pageIndex: I
       id
       teamId
       status
+      createdAt
+      updatedAt
       user{
           id
           appHomePublished
@@ -115,6 +117,8 @@ export const RewardsHistoryList = `query RewardsHistoryList($pageIndex: Int!, $p
       id
       teamId
       status
+      createdAt
+      updatedAt
       user{
           id
           appHomePublished

@@ -72,7 +72,14 @@ const SettleRedemptionRequestDialog = (props) => {
         <DialogContent dividers>
           <Typography gutterBottom style={{ fontFamily: "Product Sans" }}>
             By marking this redemption request as settled, you confirm that it
-            was delivered to user.
+            was delivered to the member.
+          </Typography>
+
+          <Typography
+            gutterBottom
+            style={{ fontFamily: "Product Sans", fontSize: 12 }}
+          >
+            Member would be notified in Slack.
           </Typography>
         </DialogContent>
         <DialogActions>

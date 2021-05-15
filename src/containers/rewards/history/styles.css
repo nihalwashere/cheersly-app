@@ -48,6 +48,34 @@
   margin-top: 20px;
 }
 
+.rewards-history-card-redemption-info {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.rewards-history-card-redemption-status {
+  font-family: Product Sans;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.rewards-history-card-redemption-created-at {
+  font-family: Product Sans;
+  font-size: 12px;
+  color: #464444;
+
+  margin-top: 10px;
+}
+
+.rewards-history-card-redemption-updated-at {
+  font-family: Product Sans;
+  font-size: 12px;
+  color: #464444;
+
+  margin-top: 10px;
+}
+
 .rewards-history-card-reward-title {
   font-family: Product Sans;
   font-size: 18px;
