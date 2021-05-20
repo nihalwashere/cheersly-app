@@ -18,6 +18,7 @@ import {
   setRedemptionRequestsPageSize,
 } from "../state/actions";
 import { resolveRedemptionCreatedDaysOld } from "../../../utils/common";
+import ImageAssets from "../../../assets/images";
 import "./styles.css";
 
 const RewardsRedemptionRequestsContainer = () => {
@@ -130,7 +131,14 @@ const RewardsRedemptionRequestsContainer = () => {
                   </div>
 
                   <div className="rewards-redemption-request-card-reward-price">
-                    ${redemptionRequest.reward.price}
+                    {redemptionRequest.reward.price}
+                    <img
+                      src={ImageAssets.CheersCoin}
+                      alt=""
+                      height="25px"
+                      width="25px"
+                      style={{ marginLeft: 5 }}
+                    />
                   </div>
                 </div>
 

@@ -77,9 +77,9 @@ const CreateRewardDialog = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [descriptionCharCount, setDescriptionCharCount] = useState(
-    MAX_REWARD_DESCRIPTION_LENGTH
-  );
+  // const [descriptionCharCount, setDescriptionCharCount] = useState(
+  //   MAX_REWARD_DESCRIPTION_LENGTH
+  // );
   const [titleValidationError, setTitleValidationError] = useState(false);
   const [descriptionValidationError, setDescriptionValidationError] = useState(
     false
@@ -108,9 +108,9 @@ const CreateRewardDialog = (props) => {
     }
 
     setDescription(event.target.value);
-    setDescriptionCharCount(
-      MAX_REWARD_DESCRIPTION_LENGTH - event.target.value.length
-    );
+    // setDescriptionCharCount(
+    //   MAX_REWARD_DESCRIPTION_LENGTH - event.target.value.length
+    // );
   };
 
   const handlePrice = (event) => {
@@ -170,9 +170,9 @@ const CreateRewardDialog = (props) => {
 
       if (!description || description !== newDescription) {
         setDescription(newDescription);
-        setDescriptionCharCount(
-          MAX_REWARD_DESCRIPTION_LENGTH - newDescription.length
-        );
+        // setDescriptionCharCount(
+        //   MAX_REWARD_DESCRIPTION_LENGTH - newDescription.length
+        // );
       }
 
       if (!price || price !== newPrice) {
@@ -208,7 +208,7 @@ const CreateRewardDialog = (props) => {
             />
           </div>
 
-          <div style={{ marginTop: 20, marginBottom: 20 }}>
+          <div style={{ marginTop: 20, marginBottom: 25 }}>
             <TextField
               placeholder="Description"
               variant="outlined"
@@ -228,16 +228,16 @@ const CreateRewardDialog = (props) => {
               }}
             />
 
-            <div className="create-reward-description-count-container">
+            {/* <div className="create-reward-description-count-container">
               <div className="create-reward-description-count">
                 {descriptionCharCount} characters remaining
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div style={{ marginTop: 35 }}>
+          <div style={{ marginTop: 50 }}>
             <TextField
-              placeholder="Price"
+              placeholder="Price in Cheers"
               variant="outlined"
               error={priceValidationError}
               required

@@ -32,6 +32,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  width: 33%;
 }
 
 .rewards-history-card-user-avatar {
@@ -52,6 +54,8 @@
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+
+  width: 33%;
 }
 
 .rewards-history-card-redemption-status {
@@ -76,6 +80,14 @@
   margin-top: 10px;
 }
 
+.rewards-history-card-reward-info {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  width: 33%;
+}
+
 .rewards-history-card-reward-title {
   font-family: Product Sans;
   font-size: 18px;
@@ -90,6 +102,9 @@
   color: #ff8c00;
 
   margin-top: 20px;
+
+  display: flex;
+  align-items: center;
 }
 
 .rewards-history-card-actions-container {

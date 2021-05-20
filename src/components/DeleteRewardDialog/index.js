@@ -71,6 +71,13 @@ const DeleteRewardDialog = (props) => {
           <Typography gutterBottom style={{ fontFamily: "Product Sans" }}>
             Are you sure you want to permanently remove this reward?
           </Typography>
+          <Typography
+            gutterBottom
+            style={{ fontFamily: "Product Sans", fontSize: 12 }}
+          >
+            Note: All redemption requests related to this reward will be marked
+            as declined.
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleSave}>Yes</Button>

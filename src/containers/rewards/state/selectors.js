@@ -1,3 +1,9 @@
+export const getRewardsOverviewPageIndex = (state) =>
+  state.rewards.rewardsOverviewPageIndex;
+
+export const getRewardsOverviewPageSize = (state) =>
+  state.rewards.rewardsOverviewPageSize;
+
 export const getRedemptionRequestPageIndex = (state) =>
   state.rewards.redemptionRequestPageIndex;
 

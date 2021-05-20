@@ -25,18 +25,21 @@ export const AdminSwitch = `mutation AdminSwitch($userId: String!, $isAdmin: Boo
 export const CreateReward = `mutation CreateReward($title: String!, $description: String!, $price: String!){
   CreateReward(title: $title, description: $description, price: $price){
     success
+    message
   }
 }`;
 
 export const UpdateReward = `mutation UpdateReward($id: String!, $title: String!, $description: String!, $price: String!){
   UpdateReward(id: $id, title: $title, description: $description, price: $price){
     success
+    message
   }
 }`;
 
 export const DeleteReward = `mutation DeleteReward($id: String!){
   DeleteReward(id: $id){
     success
+    message
   }
 }`;
 

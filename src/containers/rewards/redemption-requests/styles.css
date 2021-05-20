@@ -32,6 +32,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  width: 33%;
 }
 
 .rewards-redemption-request-card-user-avatar {
@@ -56,6 +58,14 @@
   margin-top: 8px;
 }
 
+.rewards-redemption-request-card-reward-info {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  width: 33%;
+}
+
 .rewards-redemption-request-card-reward-title {
   font-family: Product Sans;
   font-size: 18px;
@@ -70,12 +80,17 @@
   color: #ff8c00;
 
   margin-top: 20px;
+
+  display: flex;
+  align-items: center;
 }
 
 .rewards-redemption-request-card-actions-container {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+
+  width: 33%;
 }
 
 .no-rewards-redemption-request-text {

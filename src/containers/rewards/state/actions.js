@@ -20,6 +20,9 @@ import {
   SET_REWARDS_HISTORY_PAGE_SIZE,
   GET_REWARDS_HISTORY_LIST_SAGA,
   SET_SNACKBAR_FOR_REWARDS_HISTORY,
+  SET_REWARDS_OVERVIEW_PAGE_INDEX,
+  SET_REWARDS_OVERVIEW_PAGE_SIZE,
+  SET_SNACKBAR_FOR_REWARDS_OVERVIEW,
 } from "./types";
 
 export const setRewardsIsLoading = (payload) => ({
@@ -31,18 +34,28 @@ export const resetInitialRewardsState = () => ({
   type: RESET_INITIAL_REWARDS_STATE,
 });
 
-export const setRewardsList = (payload) => ({
-  type: SET_REWARDS_LIST,
-  payload,
-});
-
 export const setSelectedSectionForRewards = (payload) => ({
   type: SET_SELECTED_SECTION_FOR_REWARDS,
   payload,
 });
 
-export const setSnackbarForRedemptionRequests = (payload) => ({
-  type: SET_SNACKBAR_FOR_REDEMPTION_REQUESTS,
+export const setRewardsList = (payload) => ({
+  type: SET_REWARDS_LIST,
+  payload,
+});
+
+export const setRewardsOverviewPageIndex = (payload) => ({
+  type: SET_REWARDS_OVERVIEW_PAGE_INDEX,
+  payload,
+});
+
+export const setRewardsRewardsOverviewSize = (payload) => ({
+  type: SET_REWARDS_OVERVIEW_PAGE_SIZE,
+  payload,
+});
+
+export const setSnackbarForRewardsOverview = (payload) => ({
+  type: SET_SNACKBAR_FOR_REWARDS_OVERVIEW,
   payload,
 });
 
@@ -58,6 +71,11 @@ export const setRedemptionRequestsPageIndex = (payload) => ({
 
 export const setRedemptionRequestsPageSize = (payload) => ({
   type: SET_REDEMPTION_REQUESTS_PAGE_SIZE,
+  payload,
+});
+
+export const setSnackbarForRedemptionRequests = (payload) => ({
+  type: SET_SNACKBAR_FOR_REDEMPTION_REQUESTS,
   payload,
 });
 

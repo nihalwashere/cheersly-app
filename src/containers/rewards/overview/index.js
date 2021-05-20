@@ -17,17 +17,22 @@ import {
   updateRewardSagaAction,
   deleteRewardSagaAction,
   createRedemptionRequestSagaAction,
-  setSnackbarForRedemptionRequests,
+  setSnackbarForRewardsOverview,
 } from "../state/actions";
 import { USER_ROLE } from "../../../enums/userRoles";
+import ImageAssets from "../../../assets/images";
 import "./styles.css";
 
 const RewardsOverviewContainer = () => {
   const dispatch = useDispatch();
 
+  const {
+    cheersStat: { cheersRedeemable },
+  } = useSelector((state) => state.root);
+
   const { role, userId } = useSelector((state) => state.auth);
 
-  const { isLoading, rewards, snackBarForRedemptionRequests } = useSelector(
+  const { isLoading, rewards, snackBarForRewardsOverview } = useSelector(
     (state) => state.rewards
   );
 
@@ -104,7 +109,7 @@ const RewardsOverviewContainer = () => {
   };
 
   const handleCloseSnackBar = () => {
-    dispatch(setSnackbarForRedemptionRequests({}));
+    dispatch(setSnackbarForRewardsOverview({}));
   };
 
   useEffect(() => {
@@ -120,17 +125,28 @@ const RewardsOverviewContainer = () => {
       ) : (
         <div>
           <SnackBar
-            open={snackBarForRedemptionRequests.severity ? true : false}
+            open={snackBarForRewardsOverview.severity ? true : false}
             handleClose={handleCloseSnackBar}
-            severity={snackBarForRedemptionRequests.severity}
-            message={snackBarForRedemptionRequests.message}
+            severity={snackBarForRewardsOverview.severity}
+            message={snackBarForRewardsOverview.message}
           />
 
-          {role === USER_ROLE.ADMIN && (
-            <div className="rewards-overview-create-button-container">
-              <PrimaryButton onClick={handleRewardCreate}>Create</PrimaryButton>
+          <div className="rewards-overview-create-button-cheers-stat-container">
+            <div className="rewards-overview-cheers-stat">
+              Cheers Redeemable:{" "}
+              <span className="rewards-overview-cheers-stat-count">
+                {cheersRedeemable}
+              </span>
             </div>
-          )}
+
+            {role === USER_ROLE.ADMIN && (
+              <div className="rewards-overview-create-button-container">
+                <PrimaryButton onClick={handleRewardCreate}>
+                  + Add Reward
+                </PrimaryButton>
+              </div>
+            )}
+          </div>
 
           <div className="rewards-overview-card-container">
             {rewards.map((reward) => (
@@ -158,7 +174,14 @@ const RewardsOverviewContainer = () => {
 
                 <div className="rewards-overview-card-price-redeem-button-container">
                   <div className="rewards-overview-card-price">
-                    ${reward.price}
+                    {reward.price}{" "}
+                    <img
+                      src={ImageAssets.CheersCoin}
+                      alt=""
+                      height="25px"
+                      width="25px"
+                      style={{ marginLeft: 5 }}
+                    />
                   </div>
 
                   <div>

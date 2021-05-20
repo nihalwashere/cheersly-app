@@ -13,6 +13,7 @@ import {
   resolveRedemptionCreatedDaysOld,
   resolveRedemptionUpdatedDaysOld,
 } from "../../../utils/common";
+import ImageAssets from "../../../assets/images";
 import "./styles.css";
 
 const RewardsHistoryContainer = () => {
@@ -78,7 +79,14 @@ const RewardsHistoryContainer = () => {
                   </div>
 
                   <div className="rewards-history-card-reward-price">
-                    ${rewardHistory.reward.price}
+                    {rewardHistory.reward.price}
+                    <img
+                      src={ImageAssets.CheersCoin}
+                      alt=""
+                      height="25px"
+                      width="25px"
+                      style={{ marginLeft: 5 }}
+                    />
                   </div>
                 </div>
 

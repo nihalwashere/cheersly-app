@@ -1,6 +1,22 @@
-.rewards-overview-create-button-container {
+.rewards-overview-create-button-cheers-stat-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rewards-overview-create-button-container {
+  margin-right: 3%;
+}
+
+.rewards-overview-cheers-stat {
+  font-family: Product Sans;
+}
+
+.rewards-overview-cheers-stat-count {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 5px;
+  color: #ff8c00;
 }
 
 .rewards-overview-card-container {
@@ -51,6 +67,9 @@
   color: #ff8c00;
 
   margin-top: 20px;
+
+  display: flex;
+  align-items: center;
 }
 
 .rewards-overview-card-price-redeem-button-container {

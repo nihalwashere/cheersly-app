@@ -18,7 +18,9 @@ import {
   setSnackbarForRedemptionRequests,
   setRedemptionRequestsList,
   setRewardsHistoryList,
+  setSnackbarForRewardsOverview,
 } from "./actions";
+import { getCheersStatSagaAction } from "../../root/state/actions"; // root actions
 import {
   getRedemptionRequestPageIndex,
   getRedemptionRequestPageSize,
@@ -35,7 +37,6 @@ import {
   getRewardsHistoryList,
 } from "../../../graphql/api";
 import { SNACKBAR_SEVERITY_TYPES } from "../../../enums/snackBarSeverityTypes";
-import { REDEMPTION_REQUEST_STATUS } from "../../../enums/redemptionRequestStatus";
 
 function* getRewardsListHandler(action) {
   try {
@@ -52,7 +53,7 @@ function* getRewardsListHandler(action) {
       yield put(setRewardsList(response.data.RewardList.data));
     }
 
-    yield all([yield delay(200), yield put(setRewardsIsLoading(false))]);
+    yield all([yield delay(1000), yield put(setRewardsIsLoading(false))]);
   } catch (error) {
     console.error(error);
   }
@@ -60,8 +61,6 @@ function* getRewardsListHandler(action) {
 
 function* createRewardHandler(action) {
   try {
-    yield put(setRewardsIsLoading(true));
-
     const response = yield call(createReward, action.payload);
 
     if (
@@ -71,9 +70,25 @@ function* createRewardHandler(action) {
       response.data.CreateReward.success
     ) {
       yield put(getRewardsListSagaAction());
+      yield put(
+        setSnackbarForRewardsOverview({
+          severity: SNACKBAR_SEVERITY_TYPES.SUCCESS,
+          message: response.data.CreateReward.message,
+        })
+      );
+    } else {
+      yield put(
+        setSnackbarForRewardsOverview({
+          severity: SNACKBAR_SEVERITY_TYPES.ERROR,
+          message: response.errors[0].message,
+        })
+      );
     }
 
-    yield all([yield delay(200), yield put(setRewardsIsLoading(false))]);
+    yield all([
+      yield delay(3000),
+      yield put(setSnackbarForRewardsOverview({})),
+    ]);
   } catch (error) {
     console.error(error);
   }
@@ -81,8 +96,6 @@ function* createRewardHandler(action) {
 
 function* updateRewardHandler(action) {
   try {
-    yield put(setRewardsIsLoading(true));
-
     const response = yield call(updateReward, action.payload);
 
     if (
@@ -92,9 +105,25 @@ function* updateRewardHandler(action) {
       response.data.UpdateReward.success
     ) {
       yield put(getRewardsListSagaAction());
+      yield put(
+        setSnackbarForRewardsOverview({
+          severity: SNACKBAR_SEVERITY_TYPES.SUCCESS,
+          message: response.data.UpdateReward.message,
+        })
+      );
+    } else {
+      yield put(
+        setSnackbarForRewardsOverview({
+          severity: SNACKBAR_SEVERITY_TYPES.ERROR,
+          message: response.errors[0].message,
+        })
+      );
     }
 
-    yield all([yield delay(200), yield put(setRewardsIsLoading(false))]);
+    yield all([
+      yield delay(3000),
+      yield put(setSnackbarForRewardsOverview({})),
+    ]);
   } catch (error) {
     console.error(error);
   }
@@ -102,8 +131,6 @@ function* updateRewardHandler(action) {
 
 function* deleteRewardHandler(action) {
   try {
-    yield put(setRewardsIsLoading(true));
-
     const response = yield call(deleteReward, action.payload);
 
     if (
@@ -113,9 +140,25 @@ function* deleteRewardHandler(action) {
       response.data.DeleteReward.success
     ) {
       yield put(getRewardsListSagaAction());
+      yield put(
+        setSnackbarForRewardsOverview({
+          severity: SNACKBAR_SEVERITY_TYPES.SUCCESS,
+          message: response.data.DeleteReward.message,
+        })
+      );
+    } else {
+      yield put(
+        setSnackbarForRewardsOverview({
+          severity: SNACKBAR_SEVERITY_TYPES.ERROR,
+          message: response.errors[0].message,
+        })
+      );
     }
 
-    yield all([yield delay(200), yield put(setRewardsIsLoading(false))]);
+    yield all([
+      yield delay(3000),
+      yield put(setSnackbarForRewardsOverview({})),
+    ]);
   } catch (error) {
     console.error(error);
   }
@@ -138,7 +181,7 @@ function* getRedemptionRequestsListHandler(action) {
       );
     }
 
-    yield all([yield delay(200), yield put(setRewardsIsLoading(false))]);
+    yield all([yield delay(1000), yield put(setRewardsIsLoading(false))]);
   } catch (error) {
     console.error(error);
   }
@@ -154,15 +197,18 @@ function* createRedemptionRequestHandler(action) {
       response.data.CreateRedemptionRequest &&
       response.data.CreateRedemptionRequest.success
     ) {
-      yield put(
-        setSnackbarForRedemptionRequests({
-          severity: SNACKBAR_SEVERITY_TYPES.SUCCESS,
-          message: response.data.CreateRedemptionRequest.message,
-        })
-      );
+      yield all([
+        yield put(getCheersStatSagaAction()),
+        yield put(
+          setSnackbarForRewardsOverview({
+            severity: SNACKBAR_SEVERITY_TYPES.SUCCESS,
+            message: response.data.CreateRedemptionRequest.message,
+          })
+        ),
+      ]);
     } else {
       yield put(
-        setSnackbarForRedemptionRequests({
+        setSnackbarForRewardsOverview({
           severity: SNACKBAR_SEVERITY_TYPES.ERROR,
           message: response.errors[0].message,
         })
@@ -171,7 +217,7 @@ function* createRedemptionRequestHandler(action) {
 
     yield all([
       yield delay(3000),
-      yield put(setSnackbarForRedemptionRequests({})),
+      yield put(setSnackbarForRewardsOverview({})),
     ]);
   } catch (error) {
     console.error(error);
@@ -273,7 +319,7 @@ function* getRewardsHistoryListHandler(action) {
       yield put(setRewardsHistoryList(response.data.RewardsHistoryList.data));
     }
 
-    yield all([yield delay(200), yield put(setRewardsIsLoading(false))]);
+    yield all([yield delay(1000), yield put(setRewardsIsLoading(false))]);
   } catch (error) {
     console.error(error);
   }

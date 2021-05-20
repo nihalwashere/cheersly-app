@@ -168,7 +168,7 @@ const CreateCompanyValuesDialog = (props) => {
         open={open}
         disableBackdropClick
         fullWidth
-        maxWidth="md"
+        maxWidth="sm"
       >
         <DialogTitle onClose={handleClose}>
           Create New Company Value

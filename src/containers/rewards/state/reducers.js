@@ -1,8 +1,11 @@
 import {
-  SET_REWARDS_LIST,
   RESET_INITIAL_REWARDS_STATE,
   SET_REWARDS_IS_LOADING,
   SET_SELECTED_SECTION_FOR_REWARDS,
+  SET_REWARDS_LIST,
+  SET_REWARDS_OVERVIEW_PAGE_INDEX,
+  SET_REWARDS_OVERVIEW_PAGE_SIZE,
+  SET_SNACKBAR_FOR_REWARDS_OVERVIEW,
   SET_SNACKBAR_FOR_REDEMPTION_REQUESTS,
   SET_REDEMPTION_REQUESTS_LIST,
   SET_REDEMPTION_REQUESTS_PAGE_INDEX,
@@ -18,6 +21,12 @@ const initialState = {
   isLoading: false,
   selectedSection: REWARD_SECTIONS.OVERVIEW,
   rewards: [],
+  rewardsOverviewPageIndex: 0,
+  rewardsOverviewPageSize: 30,
+  snackBarForRewardsOverview: {
+    severity: "",
+    message: "",
+  },
 
   redemptionRequests: [],
   redemptionRequestPageIndex: 0,
@@ -49,6 +58,15 @@ export const rewardsReducer = (state = initialState, action) => {
 
     case SET_REWARDS_LIST:
       return { ...state, rewards: action.payload };
+
+    case SET_REWARDS_OVERVIEW_PAGE_INDEX:
+      return { ...state, rewardsOverviewPageIndex: action.payload };
+
+    case SET_REWARDS_OVERVIEW_PAGE_SIZE:
+      return { ...state, rewardsOverviewPageSize: action.payload };
+
+    case SET_SNACKBAR_FOR_REWARDS_OVERVIEW:
+      return { ...state, snackBarForRewardsOverview: action.payload };
 
     case SET_REDEMPTION_REQUESTS_LIST:
       return { ...state, redemptionRequests: action.payload };

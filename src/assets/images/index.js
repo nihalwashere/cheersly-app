@@ -8,6 +8,7 @@ import Pricing_Icon from "./pricing-icon.svg";
 import Billing_Icon from "./billing-icon.svg";
 import Logout_Icon from "./logout-icon.svg";
 import Right_Arrow_Icon from "./right-arrow-icon.svg";
+import CheersCoin from "./cheers-coin.svg";
 
 export default {
   Logo,
@@ -18,4 +19,5 @@ export default {
   Billing_Icon,
   Logout_Icon,
   Right_Arrow_Icon,
+  CheersCoin,
 };
