@@ -4,6 +4,7 @@ import {
   getAdminSettingsListSagaAction,
   setAdminSettingsIsLoading,
   setAdminSettingsList,
+  setTotalCount,
 } from "./actions";
 import { getAdminSettingsList, adminSwitch } from "../../../graphql/api";
 import { wrapAdminSettings } from "./helper";
@@ -20,11 +21,14 @@ function* getAdminSettingsListHandler(action) {
       response.data.AdminSettingsList &&
       response.data.AdminSettingsList.data
     ) {
-      yield put(
-        setAdminSettingsList(
-          wrapAdminSettings(response.data.AdminSettingsList.data)
-        )
-      );
+      yield all([
+        yield put(
+          setAdminSettingsList(
+            wrapAdminSettings(response.data.AdminSettingsList.data)
+          )
+        ),
+        yield put(setTotalCount(response.data.AdminSettingsList.totalCount)),
+      ]);
     }
 
     yield all([yield delay(200), yield put(setAdminSettingsIsLoading(false))]);
