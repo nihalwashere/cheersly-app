@@ -16,7 +16,8 @@ import TablePaginationActions from "../../components/TablePaginationActions";
 import Spinner from "../../components/Spinner";
 import {
   getAdminSettingsListSagaAction,
-  setAdminSettingsList,
+  setPage,
+  setRowsPerPage,
   switchAdminSagaAction,
 } from "./state/actions";
 import "./styles.css";
@@ -53,21 +54,30 @@ const AdminSettingsContainer = () => {
 
   const dispatch = useDispatch();
 
-  const { adminSettings, isLoading } = useSelector(
-    (state) => state.adminSettings
-  );
-
-  const [page, setPage] = useState(0);
-
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const {
+    adminSettings,
+    isLoading,
+    page,
+    rowsPerPage,
+    totalCount,
+  } = useSelector((state) => state.adminSettings);
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    dispatch(setPage(newPage));
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    dispatch(
+      setRowsPerPage(
+        parseInt(
+          typeof event.target.value === "object"
+            ? totalCount
+            : event.target.value,
+          10
+        )
+      )
+    );
+    dispatch(setPage(0));
   };
 
   const handleSwitchAdmin = (event, userId) => {
@@ -138,18 +148,10 @@ const AdminSettingsContainer = () => {
                 <TableFooter>
                   <StyledTableRow>
                     <TablePagination
-                      rowsPerPageOptions={[
-                        10,
-                        20,
-                        30,
-                        { label: "All", value: -1 },
-                      ]}
-                      count={adminSettings.length}
+                      rowsPerPageOptions={[10, 20, 30, 50, 100]}
+                      count={totalCount}
                       rowsPerPage={rowsPerPage}
                       page={page}
-                      SelectProps={{
-                        inputProps: { "aria-label": "rows per page" },
-                      }}
                       onChangePage={handleChangePage}
                       onChangeRowsPerPage={handleChangeRowsPerPage}
                       ActionsComponent={TablePaginationActions}
