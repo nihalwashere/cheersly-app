@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { rootContainerReducer } from "../containers/root/state/reducers";
+import { rootContainerReducer } from "../containers/routes/state/reducers";
 import { authReducer } from "../containers/auth/state/reducers";
 import { accountReducer } from "../containers/account/state/reducers";
 import { adminSettingsReducer } from "../containers/admin-settings/state/reducers";

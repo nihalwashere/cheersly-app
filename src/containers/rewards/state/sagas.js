@@ -20,7 +20,7 @@ import {
   setRewardsHistoryList,
   setSnackbarForRewardsOverview,
 } from "./actions";
-import { getCheersStatSagaAction } from "../../root/state/actions"; // root actions
+import { getCheersStatSagaAction } from "../../routes/state/actions"; // root actions
 import {
   getRedemptionRequestPageIndex,
   getRedemptionRequestPageSize,

@@ -5,7 +5,7 @@ import {
   resetInitialRootState,
   setSelectedNavSectionAction,
   getCheersStatSagaAction,
-} from "../../root/state/actions"; // root actions
+} from "../../routes/state/actions"; // root actions
 import { resetInitialLeaderboardState } from "../../leaderboard/state/actions"; // leaderboard actions
 import { resetInitialAccountState } from "../../account/state/actions"; // account actions
 import { resetInitialAdminSettingsState } from "../../admin-settings/state/actions"; // admin-settings actions
@@ -17,7 +17,7 @@ import {
   SLACK_REDIRECT_URI,
 } from "../../../utils/config";
 import { CHEERSLY_TOKEN } from "../../../utils/constants";
-import { resolveRoute } from "../../root/helper";
+import { resolveRoute } from "../../routes/helper";
 import { NAVIGATION_SECTION } from "../../../enums/navigationRoutes";
 
 function* authorizeHandler(action) {

@@ -2,15 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
+import { makeStyles } from "@mui/material/styles";
+import Avatar from "@mui/material/Avatar";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
 import ImageAssets from "../../assets/images";
 import { profileSideBarNavigationTabs } from "../../enums/profileSideBarNavigationTabs";
 import { logoutSagaAction } from "../../containers/auth/state/actions"; // auth actions
 // import { setSelectedSectionForAccount } from "../../containers/account/state/actions"; // account actions
-import { setSelectedNavSectionAction } from "../../containers/root/state/actions";
+import { setSelectedNavSectionAction } from "../../containers/routes/state/actions";
 import { NAVIGATION_SECTION } from "../../enums/navigationRoutes";
 import { ACCOUNT_SECTIONS } from "../../enums/accountSections";
 import "./styles.css";

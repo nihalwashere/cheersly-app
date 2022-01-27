@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Avatar from "@material-ui/core/Avatar";
-import Pagination from "@material-ui/lab/Pagination";
+import Avatar from "@mui/material/Avatar";
+import Pagination from "@mui/material/Pagination";
 import Spinner from "../../../components/Spinner";
 import SnackBar from "../../../components/SnackBar";
 import {

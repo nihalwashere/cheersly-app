@@ -1,5 +1,5 @@
 import { all } from "redux-saga/effects";
-import rootContainer from "../containers/root/state/sagas";
+import rootContainer from "../containers/routes/state/sagas";
 import authSaga from "../containers/auth/state/sagas";
 // import accountSaga from "../containers/account/state/sagas";
 import adminSettingsSaga from "../containers/admin-settings/state/sagas";

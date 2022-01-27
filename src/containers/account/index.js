@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import GitHubIcon from "@material-ui/icons/GitHub";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import PropTypes from "prop-types";
 import Spinner from "../../components/Spinner";
 // import { Account_Icon, Logout_Icon } from "../../assets/images";
@@ -8,7 +8,7 @@ import { ACCOUNT_SECTIONS } from "../../enums/accountSections";
 import { setSelectedSectionForAccount } from "./state/actions";
 import { logoutSagaAction } from "../auth/state/actions"; // auth actions
 import { NAVIGATION_SECTION } from "../../enums/navigationRoutes";
-import { setSelectedNavSectionAction } from "../root/state/actions";
+import { setSelectedNavSectionAction } from "../routes/state/actions";
 import ProfileContainer from "./profile";
 import "./styles.css";
 

@@ -1,10 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-import Link from "@material-ui/core/Link";
-import ViewListIcon from "@material-ui/icons/ViewList";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import Link from "@mui/material/Link";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import {
   NAVIGATION_ROUTES,
   NAVIGATION_SECTION,

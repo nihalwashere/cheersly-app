@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Spinner from "../../../components/Spinner";
 import CreateRewardDialog from "../../../components/CreateRewardDialog";
 import {
@@ -40,15 +40,11 @@ const RewardsOverviewContainer = () => {
 
   const [selectedReward, setSelectedReward] = useState({});
 
-  const [
-    shouldShowCreateRewardDialog,
-    setShouldShowCreateRewardDialog,
-  ] = useState(false);
+  const [shouldShowCreateRewardDialog, setShouldShowCreateRewardDialog] =
+    useState(false);
 
-  const [
-    shouldShowDeleteRewardDialog,
-    setShouldShowDeleteRewardDialog,
-  ] = useState(false);
+  const [shouldShowDeleteRewardDialog, setShouldShowDeleteRewardDialog] =
+    useState(false);
 
   const handleRewardCreate = () => {
     setShouldShowCreateRewardDialog(true);

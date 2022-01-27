@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
-import Paper from "@material-ui/core/Paper";
-import Avatar from "@material-ui/core/Avatar";
-import Switch from "@material-ui/core/Switch";
+import { withStyles, makeStyles } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableFooter from "@mui/material/TableFooter";
+import TablePagination from "@mui/material/TablePagination";
+import Paper from "@mui/material/Paper";
+import Avatar from "@mui/material/Avatar";
+import Switch from "@mui/material/Switch";
 import TablePaginationActions from "../../components/TablePaginationActions";
 import Spinner from "../../components/Spinner";
 import {
@@ -54,13 +54,8 @@ const AdminSettingsContainer = () => {
 
   const dispatch = useDispatch();
 
-  const {
-    adminSettings,
-    isLoading,
-    page,
-    rowsPerPage,
-    totalCount,
-  } = useSelector((state) => state.adminSettings);
+  const { adminSettings, isLoading, page, rowsPerPage, totalCount } =
+    useSelector((state) => state.adminSettings);
 
   const handleChangePage = (event, newPage) => {
     dispatch(setPage(newPage));

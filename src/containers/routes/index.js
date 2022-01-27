@@ -6,7 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Drawer from "@material-ui/core/Drawer";
+import Drawer from "@mui/material/Drawer";
 import ProtectedRoute from "../../components/ProtectedRoute";
 import PageNotFound from "../../components/PageNotFound";
 import AuthContainer from "../auth";
@@ -16,6 +16,7 @@ import AdminSettingsContainer from "../admin-settings";
 import LeaderboardContainer from "../leaderboard";
 import CompanyValuesContainer from "../company-values";
 import RewardsContainer from "../rewards";
+import MatchMomentsContainer from "../match-moments";
 // import SubscriptionContainer from "../account/subscription";
 // import ProfileContainer from "../account/profile";
 // import SettingsContainer from "../settings";
@@ -29,7 +30,7 @@ import { setSelectedNavSectionAction } from "./state/actions";
 import { NAVIGATION_SECTION } from "../../enums/navigationRoutes";
 import "./styles.css";
 
-const RootContainer = () => {
+const RoutesContainer = () => {
   const dispatch = useDispatch();
 
   const { isLoggedIn, slackUserData, role } = useSelector(
@@ -146,6 +147,15 @@ const RootContainer = () => {
               render={(props) => <RewardsContainer {...props} role={role} />}
             />
 
+            <ProtectedRoute
+              exact
+              path="/match-moments"
+              isLoggedIn={isLoggedIn}
+              render={(props) => (
+                <MatchMomentsContainer {...props} role={role} />
+              )}
+            />
+
             {/*                          
         <ProtectedRoute
           path="/account/profile"
@@ -185,4 +195,4 @@ const RootContainer = () => {
   );
 };
 
-export default RootContainer;
+export default RoutesContainer;

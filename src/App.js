@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
-import RootContainer from "./containers/root";
+import RoutesContainer from "./containers/routes";
 import { validateTokenSagaAction } from "./containers/auth/state/actions";
 import { CHEERSLY_TOKEN } from "./utils/constants";
 
@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <RootContainer />
+      <RoutesContainer />
     </Provider>
   );
 };
