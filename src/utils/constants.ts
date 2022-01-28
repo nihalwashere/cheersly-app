@@ -1,62 +1,161 @@
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import CampaignIcon from "@mui/icons-material/Campaign";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import SettingsIcon from "@mui/icons-material/Settings";
+
 export const CHEERSLY_TOKEN = "CHEERSLY_TOKEN";
 
 export const CHEERSLY_SUPPORT_EMAIL = "support@cheersly.club";
-
-export const MAX_COMPANY_VALUE_TITLE_LENGTH = 50;
-
-export const MAX_COMPANY_VALUE_DESCRIPTION_LENGTH = 250;
-
-export const MAX_REWARD_TITLE_LENGTH = 50;
-
-export const MAX_REWARD_DESCRIPTION_LENGTH = 250;
-
-export const DAYS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
-
-export const TIMES = [
-  "00: 00",
-  "01: 00",
-  "02:00",
-  "03:00",
-  "04:00",
-  "05: 00",
-  "06: 00",
-  "07: 00",
-  "08: 00",
-  "09: 00",
-  "10: 00",
-  "11: 00",
-  "12: 00",
-  "13: 00",
-  "14: 00",
-  "15: 00",
-  "16: 00",
-  "17: 00",
-  "18: 00",
-  "19: 00",
-  "20: 00",
-  "21: 00",
-  "22: 00",
-  "23: 00",
-];
-
-export const TIMEZONES = [
-  "Asia/Kolkata",
-  "America/Los_Angeles",
-  "America/New_York",
-  "Australia/Sydney",
-];
 
 export const MESSAGE_SEVERITY = {
   SUCCESS: "success",
   ERROR: "error",
   WARNING: "warning",
   INFO: "info",
+};
+
+export const NAVS = {
+  TOP_NAVS: [
+    {
+      id: 1,
+      title: "Dashboard",
+      iconComponent: DashboardIcon,
+      route: "/dashboard",
+      innerNavs: [
+        {
+          id: 1,
+          title: "Overview",
+          route: "/overview",
+        },
+        {
+          id: 2,
+          title: "Insights",
+          route: "/insights",
+        },
+        {
+          id: 3,
+          title: "Activity",
+          route: "/activity",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Recognition",
+      iconComponent: CampaignIcon,
+      route: "/recognition",
+      innerNavs: [
+        {
+          id: 1,
+          title: "Channels",
+          route: "/channels",
+        },
+        {
+          id: 2,
+          title: "Settings",
+          route: "/settings",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "Awards",
+      iconComponent: EmojiEventsIcon,
+      route: "/awards",
+      innerNavs: [
+        {
+          id: 1,
+          title: "Insights",
+          route: "/insights",
+        },
+        {
+          id: 2,
+          title: "Settings",
+          route: "/settings",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Rewards",
+      iconComponent: CardGiftcardIcon,
+      route: "/rewards",
+      innerNavs: [
+        {
+          id: 1,
+          title: "Insights",
+          route: "/insights",
+        },
+        {
+          id: 2,
+          title: "Catalog",
+          route: "/catalog",
+        },
+        {
+          id: 3,
+          title: "Settings",
+          route: "/settings",
+        },
+      ],
+    },
+    {
+      id: 5,
+      title: "Billing",
+      iconComponent: AttachMoneyIcon,
+      route: "/billing",
+      innerNavs: [
+        {
+          id: 1,
+          title: "Rewards",
+          route: "/rewards",
+        },
+        {
+          id: 2,
+          title: "Subscription",
+          route: "/subscription",
+        },
+        {
+          id: 3,
+          title: "Invoices",
+          route: "/invoices",
+        },
+      ],
+    },
+    {
+      id: 6,
+      title: "Users",
+      iconComponent: PeopleAltIcon,
+      route: "/users",
+      innerNavs: [
+        {
+          id: 1,
+          title: "All Users",
+          route: "/all",
+        },
+        {
+          id: 2,
+          title: "Teams",
+          route: "/team",
+        },
+      ],
+    },
+  ],
+  BOTTOM_NAVS: [
+    {
+      id: 7,
+      title: "Settings",
+      iconComponent: SettingsIcon,
+      route: "/settings",
+      innerNavs: [
+        {
+          id: 1,
+          title: "Team Settings",
+          route: "/team",
+        },
+      ],
+    },
+  ],
 };
