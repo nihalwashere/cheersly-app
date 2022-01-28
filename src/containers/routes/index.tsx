@@ -48,179 +48,179 @@ import { CHEERSLY_TOKEN } from "../../utils/constants";
 const RoutesContainer = () => {
   const { isLoggedIn } = useSelector((state: any) => state.login);
 
-  const isAppLoading = localStorage.getItem(CHEERSLY_TOKEN) && !isLoggedIn;
+  // const isAppLoading = localStorage.getItem(CHEERSLY_TOKEN) && !isLoggedIn;
 
   return (
     <HashRouter>
       <div className="flex">
         {isLoggedIn ? <NavBar /> : null}
 
-        {isAppLoading ? (
+        {/* {isAppLoading ? (
           <div className="flex justify-center">
             <Spinner loading={isAppLoading} />
           </div>
-        ) : (
-          <Routes>
-            {/* Auth Routes */}
+        ) : ( */}
+        <Routes>
+          {/* Auth Routes */}
 
-            <Route path="/signup" element={<SignUpContainer />} />
-            <Route path="/login" element={<LoginContainer />} />
-            <Route path="/auth" element={<SlackOAuthContainer />} />
+          <Route path="/signup" element={<SignUpContainer />} />
+          <Route path="/login" element={<LoginContainer />} />
+          <Route path="/auth" element={<SlackOAuthContainer />} />
 
-            {/* Dashboard Routes */}
-            <Route
-              path="/dashboard/overview"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <DashboardOverviewContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/dashboard/insights"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <DashboardInsightsContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/dashboard/activity"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <DashboardActivityContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Recognition Routes */}
-            <Route
-              path="/recognition/channels"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RecognitionChannelsContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/recognition/settings"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RecognitionSettingsContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Awards Routes */}
-            <Route
-              path="/awards/insights"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <AwardInsightsContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/awards/settings"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <AwardSettingsContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Rewards Routes */}
-            <Route
-              path="/rewards/insights"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RewardInsightsContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/rewards/catalog"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RewardCatalogContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/rewards/settings"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RewardSettingsContainer />
-                </ProtectedRoute>
-              }
-            />
+          {/* Dashboard Routes */}
+          <Route
+            path="/dashboard/overview"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <DashboardOverviewContainer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/insights"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <DashboardInsightsContainer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/activity"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <DashboardActivityContainer />
+              </ProtectedRoute>
+            }
+          />
+          {/* Recognition Routes */}
+          <Route
+            path="/recognition/channels"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <RecognitionChannelsContainer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recognition/settings"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <RecognitionSettingsContainer />
+              </ProtectedRoute>
+            }
+          />
+          {/* Awards Routes */}
+          <Route
+            path="/awards/insights"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <AwardInsightsContainer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/awards/settings"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <AwardSettingsContainer />
+              </ProtectedRoute>
+            }
+          />
+          {/* Rewards Routes */}
+          <Route
+            path="/rewards/insights"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <RewardInsightsContainer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/rewards/catalog"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <RewardCatalogContainer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/rewards/settings"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <RewardSettingsContainer />
+              </ProtectedRoute>
+            }
+          />
 
-            {/* Billing Routes */}
+          {/* Billing Routes */}
 
-            <Route
-              path="/billing/rewards"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <BillingRewardsContainer />
-                </ProtectedRoute>
-              }
-            />
+          <Route
+            path="/billing/rewards"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <BillingRewardsContainer />
+              </ProtectedRoute>
+            }
+          />
 
-            <Route
-              path="/billing/subscription"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <BillingSubscriptionContainer />
-                </ProtectedRoute>
-              }
-            />
+          <Route
+            path="/billing/subscription"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <BillingSubscriptionContainer />
+              </ProtectedRoute>
+            }
+          />
 
-            <Route
-              path="/billing/invoices"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <BillingInvoicesContainer />
-                </ProtectedRoute>
-              }
-            />
+          <Route
+            path="/billing/invoices"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <BillingInvoicesContainer />
+              </ProtectedRoute>
+            }
+          />
 
-            {/* Users Routes */}
+          {/* Users Routes */}
 
-            <Route
-              path="/users/all"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <UsersAllContainer />
-                </ProtectedRoute>
-              }
-            />
+          <Route
+            path="/users/all"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <UsersAllContainer />
+              </ProtectedRoute>
+            }
+          />
 
-            <Route
-              path="/users/team"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <UsersTeamContainer />
-                </ProtectedRoute>
-              }
-            />
+          <Route
+            path="/users/team"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <UsersTeamContainer />
+              </ProtectedRoute>
+            }
+          />
 
-            {/* Settings Routes */}
+          {/* Settings Routes */}
 
-            <Route
-              path="/settings/team"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <SettingsTeamContainer />
-                </ProtectedRoute>
-              }
-            />
+          <Route
+            path="/settings/team"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <SettingsTeamContainer />
+              </ProtectedRoute>
+            }
+          />
 
-            <Route
-              path="/"
-              element={
-                <Navigate to={isLoggedIn ? "/dashboard/overview" : "/login"} />
-              }
-            />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        )}
+          <Route
+            path="/"
+            element={
+              <Navigate to={isLoggedIn ? "/dashboard/overview" : "/login"} />
+            }
+          />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        {/* )} */}
       </div>
     </HashRouter>
   );

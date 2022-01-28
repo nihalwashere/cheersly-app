@@ -1,7 +1,19 @@
-import React from "react";
-import { CHEERSLY_SUPPORT_EMAIL } from "../../../utils/constants";
+import React, { useState } from "react";
+import Checkbox from "@mui/material/Checkbox";
 
 export default function SignUp() {
+  const [consentEmailChecked, setConsentEmailChecked] = useState(false);
+
+  const [tosChecked, setTosChecked] = useState(false);
+
+  const handleCheckConsentContactEmail = (event: any) => {
+    setConsentEmailChecked(event.target.checked);
+  };
+
+  const handleCheckTOS = (event: any) => {
+    setTosChecked(event.target.checked);
+  };
+
   return (
     <div className="flex h-screen w-full">
       <div className="w-1/2 flex flex-col items-center justify-center">
@@ -13,22 +25,39 @@ export default function SignUp() {
           Let&apos;s setup Cheersly for your team.
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <a href={process.env.REACT_APP_SLACK_OAUTH_URL}>
-            <img
-              alt="Sign in with Slack"
-              height="40"
-              width="172"
-              src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-              srcSet="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"
+        <div className="mt-10">
+          <div className="flex items-center">
+            <Checkbox
+              checked={consentEmailChecked}
+              onChange={handleCheckConsentContactEmail}
             />
-          </a>
+            <span>I would like to recieve marketing emails</span>
+          </div>
+
+          <div className="flex items-center">
+            <Checkbox checked={tosChecked} onChange={handleCheckTOS} />
+            <span>
+              I agree to the{" "}
+              <a href="/tos" className="underline">
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a href="/privacy" className="underline">
+                Privacy Policy
+              </a>
+            </span>
+          </div>
         </div>
 
-        <div className="mt-10">
-          Having trouble signing in? Contact{" "}
-          <a href={`mailto:${CHEERSLY_SUPPORT_EMAIL}`} className="underline">
-            {CHEERSLY_SUPPORT_EMAIL}
+        <div className="mt-10 flex justify-center">
+          <a href={process.env.REACT_APP_SLACK_SIGNUP_URL} className="disabled">
+            <img
+              alt="Add to Slack"
+              height="40"
+              width="139"
+              src="https://platform.slack-edge.com/img/add_to_slack.png"
+              srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
+            />
           </a>
         </div>
       </div>
