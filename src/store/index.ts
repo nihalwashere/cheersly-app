@@ -7,11 +7,11 @@ const configureStore = () => {
   const store = createStore(
     rootReducer,
     compose(
-      applyMiddleware(sagaMiddleware)
+      applyMiddleware(sagaMiddleware),
       // NOTE: enable for development
       // @ts-ignore
-      // window.__REDUX_DEVTOOLS_EXTENSION__ && // @ts-ignore
-      //   window.__REDUX_DEVTOOLS_EXTENSION__()
+      window.__REDUX_DEVTOOLS_EXTENSION__ && // @ts-ignore
+        window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   );
 

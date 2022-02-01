@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.table {
+  &.MuiTableContainer-root {
+    width: 80%;
+  }
+
+  .MuiTableCell-root {
+    border-bottom: 0;
+  }
+}

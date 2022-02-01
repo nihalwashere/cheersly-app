@@ -27,16 +27,21 @@ export const NAVS = {
       innerNavs: [
         {
           id: 1,
+          title: "Getting Started",
+          route: "/getting-started",
+        },
+        {
+          id: 2,
           title: "Overview",
           route: "/overview",
         },
         {
-          id: 2,
+          id: 3,
           title: "Insights",
           route: "/insights",
         },
         {
-          id: 3,
+          id: 4,
           title: "Activity",
           route: "/activity",
         },

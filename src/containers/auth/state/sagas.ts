@@ -1,66 +1,139 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
-import { LOGIN_SAGA, VALIDATE_TOKEN_SAGA, LOGOUT_SAGA } from "./types";
+import {
+  SIGNUP_SAGA,
+  LOGIN_SAGA,
+  VALIDATE_TOKEN_SAGA,
+  LOGOUT_SAGA,
+} from "./types";
 import {
   setMessage,
   setIsLoading,
   setIsLoggedIn,
   setCurrentUser,
-  resetInitialLoginState,
-} from "./actions"; // login actions
-// import { resetInitialDashboardState } from "../../dashboard/state/actions"; // dashboard actions
-import { validateToken } from "../../../graphql/api";
+  resetAppState,
+} from "./actions";
+import { signup, login, validate } from "../../../graphql/api";
 import { CHEERSLY_TOKEN, MESSAGE_SEVERITY } from "../../../utils/constants";
 
-// function* loginHandler(action: any): any {
-//   try {
-//     yield put(setIsLoading(true));
-
-//     const response = yield call(login, action.payload);
-
-//     if (response.status === 200) {
-//       const { headers, data } = response;
-
-//       localStorage.setItem(CHEERSLY_TOKEN, headers["access-token"]);
-
-//       yield all([
-//         yield put(setIsLoggedIn(true)),
-//         yield put(
-//           setCurrentUser({
-//             id: data.data.id,
-//             email: data.data.email,
-//             uid: data.data.uid,
-//           })
-//         ),
-//       ]);
-
-//       action.navigate("/dashboard");
-//     } else {
-//       yield put(
-//         setMessage({ type: MESSAGE_SEVERITY.ERROR, value: response.errors[0] })
-//       );
-//     }
-
-//     yield put(setIsLoading(false));
-//   } catch (error) {
-//     console.error(error);
-//     yield put(setIsLoading(false));
-//   }
-// }
-
-function* validateTokenHandler(): any {
+function* signupHandler(action: any): any {
   try {
-    const response = yield call(validateToken);
+    yield put(setIsLoading(true));
 
-    if (response.status === 200) {
-      const { data } = response;
+    const response = yield call(signup, action.payload);
+
+    if (response.data.success) {
+      const {
+        data: {
+          data: { user },
+        },
+      } = response;
+
+      localStorage.setItem(CHEERSLY_TOKEN, response.headers["x-access-token"]);
 
       yield all([
         yield put(setIsLoggedIn(true)),
         yield put(
           setCurrentUser({
-            id: data[0].id,
-            email: data[0].email,
-            uid: data[0].uid,
+            role: user.role,
+            id: user.slackUserData.id,
+            teamId: user.slackUserData.team_id,
+            profile: {
+              email: user.slackUserData.profile?.email || "",
+              realName: user.slackUserData.profile.real_name,
+              avatar: user.slackUserData.profile.image_24,
+            },
+          })
+        ),
+      ]);
+
+      action.navigate("/dashboard/getting-started");
+    } else {
+      yield put(
+        setMessage({
+          type: MESSAGE_SEVERITY.ERROR,
+          value: response.data.message,
+        })
+      );
+    }
+
+    yield put(setIsLoading(false));
+  } catch (error) {
+    console.error(error);
+    yield put(setIsLoading(false));
+  }
+}
+
+function* loginHandler(action: any): any {
+  try {
+    yield put(setIsLoading(true));
+
+    const response = yield call(login, action.payload);
+
+    if (response.data.success) {
+      const {
+        data: {
+          data: { user },
+        },
+      } = response;
+
+      localStorage.setItem(CHEERSLY_TOKEN, response.headers["x-access-token"]);
+
+      yield all([
+        yield put(setIsLoggedIn(true)),
+        yield put(
+          setCurrentUser({
+            role: user.role,
+            id: user.slackUserData.id,
+            teamId: user.slackUserData.team_id,
+            profile: {
+              email: user.slackUserData.profile?.email || "",
+              realName: user.slackUserData.profile.real_name,
+              avatar: user.slackUserData.profile.image_24,
+            },
+          })
+        ),
+      ]);
+
+      action.navigate("/dashboard/getting-started");
+    } else {
+      yield put(
+        setMessage({
+          type: MESSAGE_SEVERITY.ERROR,
+          value: response.data.message,
+        })
+      );
+    }
+
+    yield put(setIsLoading(false));
+  } catch (error) {
+    console.error(error);
+    yield put(setIsLoading(false));
+  }
+}
+
+function* validateTokenHandler(): any {
+  try {
+    const response = yield call(validate);
+
+    if (response.data.success) {
+      const {
+        data: {
+          data: { user },
+        },
+      } = response;
+
+      yield all([
+        yield put(setIsLoggedIn(true)),
+        yield put(
+          setCurrentUser({
+            role: user.role,
+            id: user.slackUserData.id,
+            teamId: user.slackUserData.team_id,
+            profile: {
+              email: user.slackUserData.profile?.email || "",
+              realName: user.slackUserData.profile.real_name,
+              avatar: user.slackUserData.profile.image_24,
+            },
           })
         ),
       ]);
@@ -74,24 +147,21 @@ function* validateTokenHandler(): any {
   }
 }
 
-// function* logoutHandler(action: any): any {
-//   try {
-//     localStorage.removeItem(CHEERSLY_TOKEN);
+function* logoutHandler(action: any): any {
+  try {
+    localStorage.removeItem(CHEERSLY_TOKEN);
 
-//     yield all([
-//       yield call(logout),
-//       yield put(resetInitialLoginState()), // flush login state
-//       yield put(resetInitialDashboardState()), // flush dashboard state
-//     ]);
+    yield all([yield put(resetAppState())]);
 
-//     action.navigate("/login");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+    action.navigate("/login");
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-export default function* watchLogin() {
-  //   yield takeLatest(LOGIN_SAGA, loginHandler);
+export default function* watchAuth() {
+  yield takeLatest(SIGNUP_SAGA, signupHandler);
+  yield takeLatest(LOGIN_SAGA, loginHandler);
   yield takeLatest(VALIDATE_TOKEN_SAGA, validateTokenHandler);
-  //   yield takeLatest(LOGOUT_SAGA, logoutHandler);
+  yield takeLatest(LOGOUT_SAGA, logoutHandler);
 }

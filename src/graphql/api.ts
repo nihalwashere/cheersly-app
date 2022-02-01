@@ -41,9 +41,10 @@ import {
   SettleRedemptionRequest,
   DeclineRedemptionRequest,
 } from "./mutations";
+import { CHEERSLY_TOKEN } from "../utils/constants";
 
 const getHeaders = () => ({
-  "access-token": localStorage.getItem("") || "",
+  "x-access-token": localStorage.getItem(CHEERSLY_TOKEN) || "",
 });
 
 const API = axios.create({
@@ -114,9 +115,25 @@ export const authorizeSlack = async (details: any) => {
   }
 };
 
-export const validateToken = async () => {
+export const signup = async (payload: { code: string }) => {
   try {
-    return await API.post("auth/validate-token");
+    return await API.post("/auth/signup", payload);
+  } catch (error) {
+    return processError(error);
+  }
+};
+
+export const login = async (payload: { code: string }) => {
+  try {
+    return await API.post("/auth/login", payload);
+  } catch (error) {
+    return processError(error);
+  }
+};
+
+export const validate = async () => {
+  try {
+    return await API.post("/auth/validate", {});
   } catch (error) {
     return processError(error);
   }

@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
@@ -9,8 +10,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useMergeState } from "../../utils/custom-hooks";
 import { NAVS } from "../../utils/constants";
+import { logoutSaga } from "../../containers/auth/state/actions";
 
 export default function NavBar() {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const [state, setState] = useMergeState({
@@ -41,7 +45,7 @@ export default function NavBar() {
 
   const handleLogout = () => {
     handleCloseProfileMenu();
-    // dispatch(logoutSaga(navigate));
+    dispatch(logoutSaga(navigate));
   };
 
   return (

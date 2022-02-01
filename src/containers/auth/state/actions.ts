@@ -3,7 +3,8 @@ import {
   SET_IS_LOADING,
   SET_IS_LOGGED_IN,
   SET_CURRENT_USER,
-  RESET_INITIAL_LOGIN_STATE,
+  RESET_APP_STATE,
+  SIGNUP_SAGA,
   LOGIN_SAGA,
   VALIDATE_TOKEN_SAGA,
   LOGOUT_SAGA,
@@ -29,11 +30,17 @@ export const setCurrentUser = (payload: any) => ({
   payload,
 });
 
-export const resetInitialLoginState = () => ({
-  type: RESET_INITIAL_LOGIN_STATE,
+export const resetAppState = () => ({
+  type: RESET_APP_STATE,
 });
 
 // async
+
+export const signupSaga = (payload: any, navigate: any) => ({
+  type: SIGNUP_SAGA,
+  payload,
+  navigate,
+});
 
 export const loginSaga = (payload: any, navigate: any) => ({
   type: LOGIN_SAGA,

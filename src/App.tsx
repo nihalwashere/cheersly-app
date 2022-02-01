@@ -4,13 +4,13 @@ import { ThemeProvider } from "@mui/material/styles";
 import store from "./store";
 import theme from "./mui";
 import RoutesContainer from "./containers/routes";
-// import { validateTokenSaga } from "./containers/login/state/actions";
+import { validateTokenSaga } from "./containers/auth/state/actions";
 import { CHEERSLY_TOKEN } from "./utils/constants";
 
 export default function App() {
   useEffect(() => {
     if (localStorage.getItem(CHEERSLY_TOKEN)) {
-      // store.dispatch(validateTokenSagaAction());
+      store.dispatch(validateTokenSaga());
     }
   }, []);
 

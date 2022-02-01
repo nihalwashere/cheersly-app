@@ -3,7 +3,7 @@ import {
   SET_IS_LOADING,
   SET_IS_LOGGED_IN,
   SET_CURRENT_USER,
-  RESET_INITIAL_LOGIN_STATE,
+  RESET_APP_STATE,
 } from "./types";
 
 type LoginStateType = {
@@ -14,30 +14,41 @@ type LoginStateType = {
   isLoading: boolean;
   isLoggedIn: boolean;
   user: {
-    id: number | null;
-    email: string;
-    name: string;
+    id: string;
+    teamId: string;
+    role: string;
+    profile: {
+      email: string;
+      realName: string;
+      avatar: string;
+    };
   };
 };
 
 const initialState: LoginStateType = {
+  isLoading: false,
   message: {
     type: "",
     value: "",
   },
-  isLoading: false,
   isLoggedIn: false,
   user: {
-    id: null,
-    email: "",
-    name: "",
+    id: "",
+    teamId: "",
+    role: "",
+    profile: {
+      email: "",
+      realName: "",
+      avatar: "",
+    },
   },
 };
 
-const loginReducer = (state: LoginStateType = initialState, action: any) => {
+const usersReducer = (state: LoginStateType = initialState, action: any) => {
   switch (action.type) {
     case SET_MESSAGE:
       return { ...state, message: { ...action.payload } };
+
     case SET_IS_LOADING:
       return { ...state, isLoading: action.payload };
 
@@ -47,7 +58,7 @@ const loginReducer = (state: LoginStateType = initialState, action: any) => {
     case SET_CURRENT_USER:
       return { ...state, user: { ...action.payload } };
 
-    case RESET_INITIAL_LOGIN_STATE:
+    case RESET_APP_STATE:
       return { ...initialState };
 
     default:
@@ -55,4 +66,4 @@ const loginReducer = (state: LoginStateType = initialState, action: any) => {
   }
 };
 
-export default loginReducer;
+export default usersReducer;
