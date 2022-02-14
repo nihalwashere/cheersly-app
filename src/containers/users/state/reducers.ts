@@ -3,7 +3,6 @@ import {
   SET_IS_LOADING,
   RESET_APP_STATE,
   SET_USERS,
-  SET_TEAMS,
 } from "./types";
 
 type UsersStateType = {
@@ -13,7 +12,6 @@ type UsersStateType = {
   };
   isLoading: boolean;
   users: Array<any>;
-  teams: Array<any>;
 };
 
 const initialState: UsersStateType = {
@@ -23,7 +21,6 @@ const initialState: UsersStateType = {
     value: "",
   },
   users: [],
-  teams: [],
 };
 
 const authReducer = (state: UsersStateType = initialState, action: any) => {
@@ -39,9 +36,6 @@ const authReducer = (state: UsersStateType = initialState, action: any) => {
 
     case SET_USERS:
       return { ...state, users: action.payload };
-
-    case SET_TEAMS:
-      return { ...state, teams: action.payload };
 
     default:
       return { ...state };

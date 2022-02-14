@@ -1,16 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { CHEERSLY_SUPPORT_EMAIL } from "../../../utils/constants";
+import ImageAssets from "../../../assets/images";
 
 export default function Login() {
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex h-screen w-full bg-yellow-extra-light">
       <div className="w-1/2 flex flex-col items-center justify-center">
-        {/* <img src={ImageAssets} alt="" /> */}
-        Some image here
+        <img src={ImageAssets.HappyTeam} alt="" />
       </div>
 
       <div className="w-1/2 flex flex-col items-center justify-center">
-        <div className="text-4xl font-semibold mb-12">cheersly</div>
+        <div className="w-1/2 mb-12">
+          <img src={ImageAssets.LogoWithText} alt="" />
+        </div>
 
         <div className="text-2xl font-medium">Hey there!</div>
 
@@ -28,6 +31,13 @@ export default function Login() {
               srcSet="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"
             />
           </a>
+        </div>
+
+        <div className="mt-10">
+          Not signed up yet?{" "}
+          <Link to="/signup" className="underline">
+            Sign up
+          </Link>
         </div>
 
         <div className="mt-10">

@@ -8,5 +8,5 @@ type Props = {
 export default function Spinner(props: Props) {
   const { loading } = props;
 
-  return <BeatLoader color="#5f6caf" loading={loading} />;
+  return <BeatLoader color="#EB5531" loading={loading} />;
 }

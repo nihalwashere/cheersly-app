@@ -1,15 +1,11 @@
-import React, { useCallback } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import {
-  CustomDialog,
-  CustomDialogTitle,
-} from "../../../components/CustomDialog";
+import { Dialog, DialogTitle } from "../../../components/Dialog";
 import ErrorMessage from "../../../components/ErrorMessage";
 import { useMergeState } from "../../../utils/custom-hooks";
-import CustomButton from "../../../components/CustomButton";
-// import { debounce } from "../../../utils/common";
+import Button from "../../../components/Button";
 
 type Props = {
   open: boolean;
@@ -22,14 +18,10 @@ export default function CreateTeamDialog(props: Props) {
 
   const [state, setState] = useMergeState({
     name: "",
-    members: [],
-    managers: [],
-    userSearch: "",
     errors: {},
   });
 
   const handleChange = (event: any) => {
-    console.log("HERE");
     setState({
       [event.target.name]: event.target.value,
       errors: {
@@ -37,27 +29,6 @@ export default function CreateTeamDialog(props: Props) {
       },
     });
   };
-
-  const debounce = (func: any, wait: any) => {
-    let timeout: any;
-    return (...args: any) => {
-      // @ts-ignore
-      const context = this;
-
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        timeout = null;
-        func.apply(context, args);
-      }, wait);
-    };
-  };
-
-  const handleSearch = (event: any) => {
-    console.log("value : ", event.target.value);
-    setState({ userSearch: event.target.value });
-  };
-
-  const debounceOnChange = useCallback(debounce(handleSearch, 500), []);
 
   const isFormValid = () => {
     let isValid = true;
@@ -81,11 +52,13 @@ export default function CreateTeamDialog(props: Props) {
 
     const payload = { ...state };
 
+    delete payload.errors;
+
     onSave(payload);
   };
 
   return (
-    <CustomDialog
+    <Dialog
       onClose={(event, reason) => {
         if (reason !== "backdropClick") {
           onClose(event);
@@ -96,7 +69,9 @@ export default function CreateTeamDialog(props: Props) {
       fullWidth
       disableEscapeKeyDown
     >
-      <CustomDialogTitle onClose={onClose}>Create Team</CustomDialogTitle>
+      <DialogTitle onClose={onClose}>
+        <span className="text-xl font-semibold">Create Team</span>
+      </DialogTitle>
 
       <DialogContent dividers>
         <div className="w-3/4 mt-2 mb-2">
@@ -106,7 +81,7 @@ export default function CreateTeamDialog(props: Props) {
             variant="outlined"
             name="name"
             value={state.name}
-            onChange={debounceOnChange}
+            onChange={handleChange}
             required
             error={state?.errors?.name}
           />
@@ -116,8 +91,8 @@ export default function CreateTeamDialog(props: Props) {
       </DialogContent>
 
       <DialogActions>
-        <CustomButton label="Create team" onClick={handleSave} />
+        <Button label="Save" onClick={handleSave} />
       </DialogActions>
-    </CustomDialog>
+    </Dialog>
   );
 }

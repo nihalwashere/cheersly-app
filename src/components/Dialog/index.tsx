@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react";
-import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
+import MuiDialog from "@mui/material/Dialog";
+import MuiDialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -11,7 +10,7 @@ type Props = {
   onClose: any;
 };
 
-export const CustomDialog = styled(Dialog)(({ theme }) => ({
+export const Dialog = styled(MuiDialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
   },
@@ -20,11 +19,11 @@ export const CustomDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export const CustomDialogTitle = (props: Props) => {
+export const DialogTitle = (props: Props) => {
   const { children, onClose } = props;
 
   return (
-    <DialogTitle sx={{ m: 0, p: 2 }}>
+    <MuiDialogTitle sx={{ m: 0, p: 2 }}>
       {children}
       {onClose ? (
         <IconButton
@@ -40,11 +39,6 @@ export const CustomDialogTitle = (props: Props) => {
           <CloseIcon />
         </IconButton>
       ) : null}
-    </DialogTitle>
+    </MuiDialogTitle>
   );
-};
-
-CustomDialogTitle.propTypes = {
-  children: PropTypes.node,
-  onClose: PropTypes.func.isRequired,
 };

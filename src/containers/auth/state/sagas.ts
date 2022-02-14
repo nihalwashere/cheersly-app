@@ -12,7 +12,7 @@ import {
   setCurrentUser,
   resetAppState,
 } from "./actions";
-import { signup, login, validate } from "../../../graphql/api";
+import { signup, login, validate } from "../../../api";
 import { CHEERSLY_TOKEN, MESSAGE_SEVERITY } from "../../../utils/constants";
 
 function* signupHandler(action: any): any {
@@ -115,11 +115,9 @@ function* validateTokenHandler(): any {
   try {
     const response = yield call(validate);
 
-    if (response.data.success) {
+    if (response.success) {
       const {
-        data: {
-          data: { user },
-        },
+        data: { user },
       } = response;
 
       yield all([

@@ -11,6 +11,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useMergeState } from "../../utils/custom-hooks";
 import { NAVS } from "../../utils/constants";
 import { logoutSaga } from "../../containers/auth/state/actions";
+import ImageAssets from "../../assets/images";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -51,13 +52,17 @@ export default function NavBar() {
   return (
     <div className="w-1/5 flex">
       <div className="w-20 h-screen border-r border-gray-200 flex flex-col justify-between">
-        <div className="mt-20 flex flex-col items-center">
+        <div>
+          <img src={ImageAssets.Logo} alt="" />
+        </div>
+
+        <div className="flex flex-col items-center">
           {state.topNavs.map((nav: any) => (
             <div
               key={nav.id}
               className={`w-full h-full flex justify-center mb-4  ${
                 state.selectedNav?.id === nav.id
-                  ? "bg-gray-200 border-r-2 border-yellow-400"
+                  ? "bg-gray-200 border-r-2 border-primary"
                   : ""
               }`}
             >
@@ -69,25 +74,6 @@ export default function NavBar() {
             </div>
           ))}
         </div>
-
-        {/* <div className="flex flex-col items-center">
-          {state.bottomNavs.map((nav: any) => (
-            <div
-              key={nav.id}
-              className={`w-full h-full flex justify-center mb-4  ${
-                state.selectedNav?.id === nav.id
-                  ? "bg-gray-200 border-r-2 border-yellow-400"
-                  : ""
-              }`}
-            >
-              <Tooltip title={nav.title} placement="right">
-                <IconButton onClick={() => handleNavChange(nav)}>
-                  <nav.iconComponent />
-                </IconButton>
-              </Tooltip>
-            </div>
-          ))}
-        </div> */}
 
         <div className="flex justify-center mb-4">
           <IconButton onClick={handleOpenProfileMenu} size="small">
@@ -114,7 +100,7 @@ export default function NavBar() {
       </div>
 
       <div className="w-full h-screen border-r border-gray-200 flex flex-col">
-        <div className="mt-8 pl-8">
+        <div className="pt-4 pl-8">
           <div className="flex text-2xl font-semibold">
             {state.selectedNav?.title}
           </div>

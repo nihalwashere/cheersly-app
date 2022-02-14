@@ -16,8 +16,9 @@ import DashboardInsightsContainer from "../dashboard/insights";
 import DashboardActivityContainer from "../dashboard/activity";
 
 // recognition
-import RecognitionChannelsContainer from "../recognition/channels";
-import RecognitionSettingsContainer from "../recognition/settings";
+import RecognitionTeamsContainer from "../recognition/teams";
+import RecognitionTeamDetailsContainer from "../recognition/teams/id";
+import RecognitionCompanyValuesContainer from "../recognition/company-values";
 
 // awards
 import AwardInsightsContainer from "../awards/insights";
@@ -35,7 +36,6 @@ import BillingInvoicesContainer from "../billing/invoices";
 
 // users
 import UsersAllContainer from "../users/all";
-import UsersTeamContainer from "../users/teams";
 
 // settings
 import SettingsTeamContainer from "../settings/team";
@@ -61,177 +61,201 @@ const RoutesContainer = () => {
         {isLoggedIn ? <NavBar /> : null}
 
         {isAppLoading ? (
-          <div className="flex justify-center">
+          <div className="mt-10 w-full flex justify-center">
             <Spinner loading={isAppLoading} />
           </div>
         ) : (
-          <Routes>
-            <Route path="/test" element={<Test />} />
+          <div className="p-4 w-full">
+            <Routes>
+              <Route path="/test" element={<Test />} />
 
-            {/* Auth Routes */}
-            <Route path="/signup" element={<SignUpContainer />} />
-            <Route
-              path="/signup/auth"
-              element={<SlackSignUpOAuthContainer />}
-            />
-            <Route path="/login" element={<LoginContainer />} />
-            <Route path="/login/auth" element={<SlackLoginOAuthContainer />} />
+              {/* Auth Routes */}
+              <Route path="/signup" element={<SignUpContainer />} />
 
-            {/* Dashboard Routes */}
+              <Route
+                path="/signup/auth"
+                element={<SlackSignUpOAuthContainer />}
+              />
+              <Route path="/login" element={<LoginContainer />} />
 
-            <Route
-              path="/dashboard/getting-started"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <DashboardGettingStartedContainer />
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/login/auth"
+                element={<SlackLoginOAuthContainer />}
+              />
 
-            <Route
-              path="/dashboard/overview"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <DashboardOverviewContainer />
-                </ProtectedRoute>
-              }
-            />
+              {/* Dashboard Routes */}
 
-            <Route
-              path="/dashboard/insights"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <DashboardInsightsContainer />
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/dashboard/getting-started"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <DashboardGettingStartedContainer />
+                  </ProtectedRoute>
+                }
+              />
 
-            <Route
-              path="/dashboard/activity"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <DashboardActivityContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Recognition Routes */}
-            <Route
-              path="/recognition/channels"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RecognitionChannelsContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/recognition/settings"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RecognitionSettingsContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Awards Routes */}
-            <Route
-              path="/awards/insights"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <AwardInsightsContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/awards/settings"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <AwardSettingsContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Rewards Routes */}
-            <Route
-              path="/rewards/insights"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RewardInsightsContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/rewards/catalog"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RewardCatalogContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/rewards/settings"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <RewardSettingsContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Billing Routes */}
-            <Route
-              path="/billing/rewards"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <BillingRewardsContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/billing/subscription"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <BillingSubscriptionContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/billing/invoices"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <BillingInvoicesContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Users Routes */}
-            <Route
-              path="/users/all"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <UsersAllContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/users/team"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <UsersTeamContainer />
-                </ProtectedRoute>
-              }
-            />
-            {/* Settings Routes */}
-            <Route
-              path="/settings/team"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <SettingsTeamContainer />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/"
-              element={
-                <Navigate to={isLoggedIn ? "/dashboard/overview" : "/login"} />
-              }
-            />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+              <Route
+                path="/dashboard/overview"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <DashboardOverviewContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/dashboard/insights"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <DashboardInsightsContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/dashboard/activity"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <DashboardActivityContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Recognition Routes */}
+              <Route
+                path="/recognition/teams"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <RecognitionTeamsContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/recognition/teams/:teamId"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <RecognitionTeamDetailsContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/recognition/company-values"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <RecognitionCompanyValuesContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Awards Routes */}
+              <Route
+                path="/awards/insights"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <AwardInsightsContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/awards/settings"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <AwardSettingsContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Rewards Routes */}
+              <Route
+                path="/rewards/insights"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <RewardInsightsContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/rewards/catalog"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <RewardCatalogContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/rewards/settings"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <RewardSettingsContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Billing Routes */}
+              <Route
+                path="/billing/rewards"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <BillingRewardsContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/billing/subscription"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <BillingSubscriptionContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/billing/invoices"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <BillingInvoicesContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Users Routes */}
+              <Route
+                path="/users/all"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <UsersAllContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Settings Routes */}
+              <Route
+                path="/settings/team"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <SettingsTeamContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/"
+                element={
+                  <Navigate
+                    to={isLoggedIn ? "/dashboard/overview" : "/login"}
+                  />
+                }
+              />
+
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </div>
         )}
       </div>
     </BrowserRouter>

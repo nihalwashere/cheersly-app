@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
+import ImageAssets from "../../../assets/images";
 
 export default function SignUp() {
   const [consentEmailChecked, setConsentEmailChecked] = useState(false);
@@ -15,9 +17,11 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex h-screen w-full bg-yellow-extra-light">
       <div className="w-1/2 flex flex-col items-center justify-center">
-        <div className="text-4xl font-semibold mb-12">cheersly</div>
+        <div className="w-1/2 mb-12">
+          <img src={ImageAssets.LogoWithText} alt="" />
+        </div>
 
         <div className="text-2xl font-medium">Hey there!</div>
 
@@ -60,11 +64,17 @@ export default function SignUp() {
             />
           </a>
         </div>
+
+        <div className="mt-10">
+          Already signed up?{" "}
+          <Link to="/login" className="underline">
+            Login
+          </Link>
+        </div>
       </div>
 
       <div className="w-1/2 flex flex-col items-center justify-center">
-        {/* <img src={ImageAssets} alt="" /> */}
-        Some image here
+        <img src={ImageAssets.HappyTeam} alt="" />
       </div>
     </div>
   );

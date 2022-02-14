@@ -42,37 +42,10 @@ const processError = (error: Error) => {
 
 // AUTH
 
-export const authorizeSlack = async (details: any) => {
-  try {
-    let formBody: any = [];
-
-    // eslint-disable-next-line
-    for (const property in details) {
-      const encodedKey = encodeURIComponent(property);
-      const encodedValue = encodeURIComponent(details[property]);
-      formBody.push(`${encodedKey}=${encodedValue}`);
-    }
-
-    formBody = formBody.join("&");
-
-    const req = await fetch(`${process.env.SLACK_API}/oauth.v2.access`, {
-      method: "POST",
-      body: formBody,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
-
-    const res = await req.json();
-    return res;
-  } catch (error) {
-    return processError(error);
-  }
-};
-
 export const signup = async (payload: { code: string }) => {
   try {
-    return await API.post("/auth/signup", payload);
+    const response = await API.post("/auth/signup", payload);
+    return response;
   } catch (error) {
     return processError(error);
   }
@@ -80,7 +53,8 @@ export const signup = async (payload: { code: string }) => {
 
 export const login = async (payload: { code: string }) => {
   try {
-    return await API.post("/auth/login", payload);
+    const response = await API.post("/auth/login", payload);
+    return response;
   } catch (error) {
     return processError(error);
   }
@@ -88,7 +62,8 @@ export const login = async (payload: { code: string }) => {
 
 export const validate = async () => {
   try {
-    return await API.post("/auth/validate", {});
+    const response = await API.post("/auth/validate", {});
+    return response.data;
   } catch (error) {
     return processError(error);
   }
@@ -98,15 +73,30 @@ export const validate = async () => {
 
 export const getAllUsers = async (params: any) => {
   try {
-    return await API.get("/users/all", { params });
+    const response = await API.get("/users/all", { params });
+    return response.data;
   } catch (error) {
     return processError(error);
   }
 };
 
+/* ********* RECOGNITION ********** */
+
+// TEAMS
+
 export const getAllTeams = async () => {
   try {
-    return await API.get("/users/teams");
+    const response = await API.get("/recognition/teams");
+    return response.data;
+  } catch (error) {
+    return processError(error);
+  }
+};
+
+export const getTeamDetails = async (id: string) => {
+  try {
+    const response = await API.get(`/recognition/teams/${id}`);
+    return response.data;
   } catch (error) {
     return processError(error);
   }
@@ -114,7 +104,8 @@ export const getAllTeams = async () => {
 
 export const createTeam = async (payload: any) => {
   try {
-    return await API.post("/users/teams", payload);
+    const response = await API.post("/recognition/teams", payload);
+    return response.data;
   } catch (error) {
     return processError(error);
   }
@@ -122,7 +113,8 @@ export const createTeam = async (payload: any) => {
 
 export const updateTeam = async (id: string, payload: any) => {
   try {
-    return await API.put(`/users/teams/${id}`, payload);
+    const response = await API.put(`/recognition/teams/${id}`, payload);
+    return response.data;
   } catch (error) {
     return processError(error);
   }
@@ -130,7 +122,60 @@ export const updateTeam = async (id: string, payload: any) => {
 
 export const deleteTeam = async (id: string) => {
   try {
-    return await API.delete(`/users/teams/${id}`);
+    const response = await API.delete(`/users/teams/${id}`);
+    return response.data;
+  } catch (error) {
+    return processError(error);
+  }
+};
+
+// COMPANY VALUES
+
+export const getCompanyValues = async () => {
+  try {
+    const response = await API.get("/recognition/company-values");
+    return response.data;
+  } catch (error) {
+    return processError(error);
+  }
+};
+
+export const createCompanyValues = async (payload: any) => {
+  try {
+    const response = await API.post("/recognition/company-values", payload);
+    return response.data;
+  } catch (error) {
+    return processError(error);
+  }
+};
+
+export const updateCompanyValues = async (id: string, payload: any) => {
+  try {
+    const response = await API.put(
+      `/recognition/company-values/${id}`,
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    return processError(error);
+  }
+};
+
+export const deleteCompanyValues = async (id: string) => {
+  try {
+    const response = await API.delete(`/recognition/company-values/${id}`);
+    return response.data;
+  } catch (error) {
+    return processError(error);
+  }
+};
+
+// SLACK CHANNELS
+
+export const getSlackChannels = async () => {
+  try {
+    const response = await API.get("/slack/channels");
+    return response.data;
   } catch (error) {
     return processError(error);
   }

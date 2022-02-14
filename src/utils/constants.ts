@@ -55,13 +55,13 @@ export const NAVS = {
       innerNavs: [
         {
           id: 1,
-          title: "Channels",
-          route: "/channels",
+          title: "Teams",
+          route: "/teams",
         },
         {
           id: 2,
-          title: "Settings",
-          route: "/settings",
+          title: "Company Values",
+          route: "/company-values",
         },
       ],
     },
@@ -139,11 +139,6 @@ export const NAVS = {
           id: 1,
           title: "All Users",
           route: "/all",
-        },
-        {
-          id: 2,
-          title: "Teams",
-          route: "/team",
         },
       ],
     },
