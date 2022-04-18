@@ -1,9 +1,9 @@
+import { RESET_APP_STATE } from "../../global/state/types";
 import {
   SET_MESSAGE,
   SET_IS_LOADING,
   SET_IS_LOGGED_IN,
   SET_CURRENT_USER,
-  RESET_APP_STATE,
 } from "./types";
 
 type LoginStateType = {
@@ -17,6 +17,7 @@ type LoginStateType = {
     id: string;
     teamId: string;
     role: string;
+    country: string;
     profile: {
       email: string;
       realName: string;
@@ -35,6 +36,7 @@ const initialState: LoginStateType = {
   user: {
     id: "",
     teamId: "",
+    country: "",
     role: "",
     profile: {
       email: "",

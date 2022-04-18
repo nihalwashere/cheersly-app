@@ -34,7 +34,10 @@ export default function TeamDetails() {
 
   const [state, setState] = useMergeState({
     name: "",
-    channel: "",
+    channel: {
+      id: "",
+      name: "",
+    },
     pointAllowance: "",
     pointAmountOptions: [],
     managers: [],
@@ -47,6 +50,15 @@ export default function TeamDetails() {
       [event.target.name]: event.target.value,
       errors: {
         [event.target.name]: false,
+      },
+    });
+  };
+
+  const handleChannelChange = (event: any) => {
+    setState({
+      channel: {
+        id: event.target.value.id,
+        name: event.target.value.name,
       },
     });
   };
@@ -234,10 +246,11 @@ export default function TeamDetails() {
                     variant="outlined"
                     name="channel"
                     value={state.channel}
-                    onChange={handleChange}
+                    renderValue={(value: any) => value.name}
+                    onChange={handleChannelChange}
                   >
                     {slackChannels.map((item: any) => (
-                      <MenuItem key={item.id} value={item.id}>
+                      <MenuItem key={item.id} value={item}>
                         {item.name}
                       </MenuItem>
                     ))}

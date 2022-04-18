@@ -11,8 +11,7 @@ import SlackLoginOAuthContainer from "../auth/slack-login-oauth";
 
 // dashboard
 import DashboardGettingStartedContainer from "../dashboard/getting-started";
-import DashboardOverviewContainer from "../dashboard/overview";
-import DashboardInsightsContainer from "../dashboard/insights";
+// import DashboardOverviewContainer from "../dashboard/overview";
 import DashboardActivityContainer from "../dashboard/activity";
 
 // recognition
@@ -21,13 +20,17 @@ import RecognitionTeamDetailsContainer from "../recognition/teams/id";
 import RecognitionCompanyValuesContainer from "../recognition/company-values";
 
 // awards
-import AwardInsightsContainer from "../awards/insights";
-import AwardSettingsContainer from "../awards/settings";
+// import AwardInsightsContainer from "../awards/insights";
+// import AwardSettingsContainer from "../awards/settings";
+
+// redeem
+import RedeemContainer from "../redeem";
+import RedeemGiftCardsContainer from "../redeem/gift-cards";
 
 // rewards
-import RewardInsightsContainer from "../rewards/insights";
-import RewardCatalogContainer from "../rewards/catalog";
-import RewardSettingsContainer from "../rewards/settings";
+// import RewardInsightsContainer from "../rewards/insights";
+// import RewardCustomCatalogContainer from "../rewards/custom-catalog";
+// import RewardSettingsContainer from "../rewards/settings";
 
 // billing
 import BillingRewardsContainer from "../billing/rewards";
@@ -35,10 +38,10 @@ import BillingSubscriptionContainer from "../billing/subscription";
 import BillingInvoicesContainer from "../billing/invoices";
 
 // users
-import UsersAllContainer from "../users/all";
+import UsersContainer from "../users";
 
 // settings
-import SettingsTeamContainer from "../settings/team";
+import SettingsContainer from "../settings";
 
 // test
 import Test from "./test";
@@ -61,11 +64,11 @@ const RoutesContainer = () => {
         {isLoggedIn ? <NavBar /> : null}
 
         {isAppLoading ? (
-          <div className="mt-10 w-full flex justify-center">
+          <div className="mt-10 w-full h-screen flex justify-center">
             <Spinner loading={isAppLoading} />
           </div>
         ) : (
-          <div className="p-4 w-full">
+          <div className="p-4 w-full h-screen overflow-y-auto">
             <Routes>
               <Route path="/test" element={<Test />} />
 
@@ -94,23 +97,14 @@ const RoutesContainer = () => {
                 }
               />
 
-              <Route
+              {/* <Route
                 path="/dashboard/overview"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <DashboardOverviewContainer />
                   </ProtectedRoute>
                 }
-              />
-
-              <Route
-                path="/dashboard/insights"
-                element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <DashboardInsightsContainer />
-                  </ProtectedRoute>
-                }
-              />
+              /> */}
 
               <Route
                 path="/dashboard/activity"
@@ -150,51 +144,70 @@ const RoutesContainer = () => {
               />
 
               {/* Awards Routes */}
-              <Route
+              {/* <Route
                 path="/awards/insights"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <AwardInsightsContainer />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
 
-              <Route
+              {/* <Route
                 path="/awards/settings"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <AwardSettingsContainer />
                   </ProtectedRoute>
                 }
+              /> */}
+
+              {/* Redeem */}
+              <Route
+                path="/redeem"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <RedeemContainer />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/redeem/gift-cards/:brandKey"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <RedeemGiftCardsContainer />
+                  </ProtectedRoute>
+                }
               />
 
               {/* Rewards Routes */}
-              <Route
+              {/* <Route
                 path="/rewards/insights"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <RewardInsightsContainer />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
 
-              <Route
+              {/* <Route
                 path="/rewards/catalog"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <RewardCatalogContainer />
+                    <RewardCustomCatalogContainer />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
 
-              <Route
+              {/* <Route
                 path="/rewards/settings"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <RewardSettingsContainer />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
 
               {/* Billing Routes */}
               <Route
@@ -226,20 +239,20 @@ const RoutesContainer = () => {
 
               {/* Users Routes */}
               <Route
-                path="/users/all"
+                path="/users"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <UsersAllContainer />
+                    <UsersContainer />
                   </ProtectedRoute>
                 }
               />
 
               {/* Settings Routes */}
               <Route
-                path="/settings/team"
+                path="/settings"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <SettingsTeamContainer />
+                    <SettingsContainer />
                   </ProtectedRoute>
                 }
               />
@@ -248,7 +261,7 @@ const RoutesContainer = () => {
                 path="/"
                 element={
                   <Navigate
-                    to={isLoggedIn ? "/dashboard/overview" : "/login"}
+                    to={isLoggedIn ? "/dashboard/getting-started" : "/login"}
                   />
                 }
               />

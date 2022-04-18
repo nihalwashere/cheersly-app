@@ -1,7 +1,7 @@
+import { RESET_APP_STATE } from "../../global/state/types";
 import {
   SET_MESSAGE,
   SET_IS_LOADING,
-  RESET_APP_STATE,
   SET_SLACK_CHANNELS,
   SET_TEAMS,
   SET_TEAM_DETAILS,

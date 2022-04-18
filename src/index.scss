@@ -8,6 +8,7 @@
 
 body,
 html {
+  background-color: #fffaec;
   box-sizing: border-box;
   font-family: var(--font-family-sans-serif);
   -moz-osx-font-smoothing: grayscale;
@@ -25,29 +26,63 @@ html {
     font-family: var(--font-family-sans-serif);
   }
 
-  color: #1e1e1e;
+  color: $cy-black;
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #fffaec;
-}
-
 .table {
   &.MuiTableContainer-root {
     width: 80%;
   }
 
-  .MuiTableCell-root {
-    border-bottom: 0;
-  }
+  // .MuiTableCell-root {
+  //   border-bottom: 0;
+  // }
 }
 
-.team-card:hover {
-  transition: box-shadow 0.2s cubic-bezier(0.11, 0.93, 0.2, 0.96),
-    transform 0.2s cubic-bezier(0.11, 0.93, 0.2, 0.96);
-  box-shadow: 0 3px 5px rgb(64 52 45 / 5%);
+.card {
+  background: $cy-white;
+  border: 1px solid $cy-dark-gray;
+  box-shadow: 0px 2px 8px rgba(30, 30, 30, 0.06);
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.1);
+}
+
+.getting-started-card {
+  background: $cy-white;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+  height: auto;
+}
+
+.slack-member {
+  background: rgba(var(--sk_highlight_accent, 29, 155, 209), 0.1);
+  color: rgba(var(--sk_highlight, 18, 100, 163), 1);
+}
+
+.slack-code-block {
+  --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
+  font-family: Monaco, Menlo, Consolas, Courier New, monospace !important;
+  font-variant-ligatures: none;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: normal;
+  -webkit-tab-size: 4;
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+.slack-code {
+  padding: 2px 3px 1px;
+  border: 1px solid var(--saf-0);
+  border-radius: 3px;
+  background-color: rgba(var(--sk_foreground_min, 29, 28, 29), 0.04);
+  color: #e01e5a;
 }

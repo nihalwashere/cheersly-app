@@ -6,14 +6,24 @@ import {
   LOGOUT_SAGA,
 } from "./types";
 import {
+  resetAppState,
+  getTeamPointBalanceSaga,
+  getUserPointBalanceSaga,
+} from "../../global/state/actions";
+import {
   setMessage,
   setIsLoading,
   setIsLoggedIn,
   setCurrentUser,
-  resetAppState,
 } from "./actions";
 import { signup, login, validate } from "../../../api";
 import { CHEERSLY_TOKEN, MESSAGE_SEVERITY } from "../../../utils/constants";
+
+const wrapUserProfile = (payload: any) => ({
+  email: payload.slackUserData.profile?.email,
+  realName: payload.slackUserData.profile.real_name,
+  avatar: payload.slackUserData.profile.image_24,
+});
 
 function* signupHandler(action: any): any {
   try {
@@ -35,13 +45,10 @@ function* signupHandler(action: any): any {
         yield put(
           setCurrentUser({
             role: user.role,
+            country: user.country,
             id: user.slackUserData.id,
             teamId: user.slackUserData.team_id,
-            profile: {
-              email: user.slackUserData.profile?.email || "",
-              realName: user.slackUserData.profile.real_name,
-              avatar: user.slackUserData.profile.image_24,
-            },
+            profile: wrapUserProfile(user),
           })
         ),
       ]);
@@ -83,13 +90,10 @@ function* loginHandler(action: any): any {
         yield put(
           setCurrentUser({
             role: user.role,
+            country: user.country,
             id: user.slackUserData.id,
             teamId: user.slackUserData.team_id,
-            profile: {
-              email: user.slackUserData.profile?.email || "",
-              realName: user.slackUserData.profile.real_name,
-              avatar: user.slackUserData.profile.image_24,
-            },
+            profile: wrapUserProfile(user),
           })
         ),
       ]);
@@ -125,15 +129,14 @@ function* validateTokenHandler(): any {
         yield put(
           setCurrentUser({
             role: user.role,
+            country: user.country,
             id: user.slackUserData.id,
             teamId: user.slackUserData.team_id,
-            profile: {
-              email: user.slackUserData.profile?.email || "",
-              realName: user.slackUserData.profile.real_name,
-              avatar: user.slackUserData.profile.image_24,
-            },
+            profile: wrapUserProfile(user),
           })
         ),
+        yield put(getTeamPointBalanceSaga()),
+        yield put(getUserPointBalanceSaga()),
       ]);
     } else {
       window.location.href = "/";
@@ -145,13 +148,13 @@ function* validateTokenHandler(): any {
   }
 }
 
-function* logoutHandler(action: any): any {
+function* logoutHandler(): any {
   try {
     localStorage.removeItem(CHEERSLY_TOKEN);
 
     yield all([yield put(resetAppState())]);
 
-    action.navigate("/login");
+    window.location.href = "/login";
   } catch (error) {
     console.error(error);
   }

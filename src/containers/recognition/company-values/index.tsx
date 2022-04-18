@@ -118,7 +118,7 @@ export default function RecognitionCompanyValues() {
             {companyValues.map((companyValue: any) => (
               <div
                 key={companyValue._id}
-                className="w-full h-24 p-4 mb-4 flex justify-between rounded-md bg-white mr-10 cursor-pointer team-card"
+                className="w-full h-24 p-4 mb-4 flex justify-between rounded-md bg-white mr-10 cursor-pointer card"
               >
                 <div>
                   <div className="font-semibold">{companyValue.title}</div>

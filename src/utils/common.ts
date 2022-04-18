@@ -1,3 +1,5 @@
+import { DEFAULT_BASE_CURRENCY, DEFAULT_BASE_POINT_VALUE } from "./constants";
+
 // Originally inspired by  David Walsh (https://davidwalsh.name/javascript-debounce-function)
 
 // Returns a function, that, as long as it continues to be invoked, will not
@@ -29,3 +31,22 @@ export const debounce = (func: any, wait: number) => {
     timeout = setTimeout(later, wait);
   };
 };
+
+export const getPointsInRewardCurrency = (
+  faceValue: number,
+  rewardCurrencyCode: string,
+  baseFx: number
+) => {
+  if (rewardCurrencyCode === DEFAULT_BASE_CURRENCY) {
+    return Math.ceil(faceValue / DEFAULT_BASE_POINT_VALUE);
+  }
+
+  return Math.ceil(faceValue / baseFx / DEFAULT_BASE_POINT_VALUE);
+};
+
+export const validateEmail = (email: string) =>
+  String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );

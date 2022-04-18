@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import MuiButton from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 type Props = {
   label: string;
@@ -8,6 +9,11 @@ type Props = {
   type?: any;
   variant?: any;
   color?: any;
+  disabled?: boolean;
+  startIcon?: any;
+  loading?: boolean;
+  loadingPosition?: "start" | "end" | "center" | undefined;
+  loaderButton?: boolean;
 };
 
 const StyledButton = styled(MuiButton)(({ theme }: any) => ({
@@ -16,18 +22,55 @@ const StyledButton = styled(MuiButton)(({ theme }: any) => ({
   fontSize: 16,
 }));
 
+const StyledLoadingButton = styled(LoadingButton)(({ theme }: any) => ({
+  backgroundColor: theme.palette.primary,
+  textTransform: "none",
+  fontSize: 16,
+}));
+
 export default function Button(props: Props) {
-  const { onClick, label, type, variant = "contained", color } = props;
+  const {
+    onClick,
+    label,
+    type,
+    variant = "contained",
+    color,
+    disabled = false,
+    startIcon = null,
+    loading,
+    loadingPosition,
+    loaderButton = false,
+  } = props;
 
   return (
-    <StyledButton
-      variant={variant}
-      onClick={onClick}
-      type={type}
-      color={color}
-      disableElevation
-    >
-      <span className={`${!color ? "text-white" : ""}`}>{label}</span>
-    </StyledButton>
+    <div>
+      {!loaderButton ? (
+        <StyledButton
+          variant={variant}
+          onClick={onClick}
+          type={type}
+          color={color}
+          disableElevation
+          disabled={disabled}
+          startIcon={startIcon}
+        >
+          <span className={`${!color ? "text-white" : ""}`}>{label}</span>
+        </StyledButton>
+      ) : (
+        <StyledLoadingButton
+          variant={variant}
+          onClick={onClick}
+          type={type}
+          color={color}
+          disableElevation
+          disabled={disabled}
+          startIcon={startIcon}
+          loading={loading}
+          loadingPosition={loadingPosition}
+        >
+          <span className={`${!color ? "text-white" : ""}`}>{label}</span>
+        </StyledLoadingButton>
+      )}
+    </div>
   );
 }

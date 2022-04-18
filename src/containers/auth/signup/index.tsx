@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
 import ImageAssets from "../../../assets/images";
 
 export default function SignUp() {
-  const [consentEmailChecked, setConsentEmailChecked] = useState(false);
+  // const [consentEmailChecked, setConsentEmailChecked] = useState(false);
 
-  const [tosChecked, setTosChecked] = useState(false);
+  // const [tosChecked, setTosChecked] = useState(false);
 
-  const handleCheckConsentContactEmail = (event: any) => {
-    setConsentEmailChecked(event.target.checked);
-  };
+  // const handleCheckConsentContactEmail = (event: any) => {
+  //   setConsentEmailChecked(event.target.checked);
+  // };
 
-  const handleCheckTOS = (event: any) => {
-    setTosChecked(event.target.checked);
-  };
+  // const handleCheckTOS = (event: any) => {
+  //   setTosChecked(event.target.checked);
+  // };
 
   return (
     <div className="flex h-screen w-full bg-yellow-extra-light">
@@ -29,7 +29,7 @@ export default function SignUp() {
           Let&apos;s setup Cheersly for your team.
         </div>
 
-        <div className="mt-10">
+        {/* <div className="mt-10">
           <div className="flex items-center">
             <Checkbox
               checked={consentEmailChecked}
@@ -51,7 +51,7 @@ export default function SignUp() {
               </a>
             </span>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-10 flex justify-center">
           <a href={process.env.REACT_APP_SLACK_SIGNUP_URL} className="disabled">

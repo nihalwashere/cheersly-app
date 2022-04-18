@@ -66,7 +66,7 @@ export default function Teams() {
             <Button label="Create team" onClick={handleOpenCreateTeamDialog} />
           </div>
 
-          <div className="flex mt-10">
+          <div className="grid grid-cols-4 gap-4 mt-10">
             {teams.map((team: any) => (
               <TeamCard
                 key={team._id}

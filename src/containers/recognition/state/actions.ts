@@ -1,7 +1,6 @@
 import {
   SET_MESSAGE,
   SET_IS_LOADING,
-  RESET_APP_STATE,
   SET_SLACK_CHANNELS,
   SET_TEAMS,
   SET_TEAM_DETAILS,
@@ -26,10 +25,6 @@ export const setMessage = (payload: any) => ({
 export const setIsLoading = (payload: any) => ({
   type: SET_IS_LOADING,
   payload,
-});
-
-export const resetAppState = () => ({
-  type: RESET_APP_STATE,
 });
 
 export const setSlackChannels = (payload: any) => ({

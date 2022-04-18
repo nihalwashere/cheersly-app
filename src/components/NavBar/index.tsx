@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
@@ -8,9 +8,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Button from "../Button";
+import SelectCountryDialog from "../SelectCountryDialog";
 import { useMergeState } from "../../utils/custom-hooks";
 import { NAVS } from "../../utils/constants";
 import { logoutSaga } from "../../containers/auth/state/actions";
+import { updateCountryForUserSaga } from "../../containers/users/state/actions"; // user actions
 import ImageAssets from "../../assets/images";
 
 export default function NavBar() {
@@ -18,17 +21,29 @@ export default function NavBar() {
 
   const navigate = useNavigate();
 
+  const { pathname } = useLocation();
+
+  const { user } = useSelector((state: any) => state.auth);
+
+  const { teamPointBalance, userPointBalance } = useSelector(
+    (state: any) => state.global
+  );
+
   const [state, setState] = useMergeState({
     selectedNav: NAVS.TOP_NAVS[0],
     selectedInnerNav: NAVS.TOP_NAVS[0].innerNavs[0],
-    topNavs: NAVS.TOP_NAVS,
-    bottomNavs: NAVS.BOTTOM_NAVS,
     profileMenuAnchorEl: null,
+    shouldShowSelectCountryDialog: false,
   });
 
   const handleNavChange = (nav: any) => {
     setState({ selectedNav: nav, selectedInnerNav: nav.innerNavs[0] });
-    navigate(`${nav.route}${nav.innerNavs[0].route}`);
+
+    if (nav.innerNavs[0]) {
+      navigate(`${nav.route}${nav.innerNavs[0].route}`);
+    } else {
+      navigate(`${nav.route}`);
+    }
   };
 
   const handleInnerNavChange = (innerNav: any) => {
@@ -46,18 +61,58 @@ export default function NavBar() {
 
   const handleLogout = () => {
     handleCloseProfileMenu();
-    dispatch(logoutSaga(navigate));
+    dispatch(logoutSaga());
   };
 
+  const handleRedeemRedirect = () => {
+    navigate("/redeem");
+  };
+
+  const handleOpenSelectCountryDialog = () => {
+    setState({ shouldShowSelectCountryDialog: true });
+    handleCloseProfileMenu();
+  };
+
+  const handleCloseShouldShowSelectCountryDialog = () => {
+    setState({ shouldShowSelectCountryDialog: false });
+  };
+
+  const handleSaveCountry = (payload: any) => {
+    dispatch(updateCountryForUserSaga(payload));
+
+    handleCloseShouldShowSelectCountryDialog();
+  };
+
+  useEffect(() => {
+    const mainNav = pathname.split("/")[1];
+    const nestedNav = pathname.split("/")[2];
+
+    const topNav = NAVS.TOP_NAVS.find((elem) => elem.route === `/${mainNav}`);
+
+    if (topNav?.route) {
+      setState({ selectedNav: topNav });
+
+      if (nestedNav) {
+        const innerNav = topNav?.innerNavs.find(
+          (elem) => elem.route === `/${nestedNav}`
+        );
+
+        if (innerNav?.route) {
+          setState({ selectedInnerNav: innerNav });
+        }
+      }
+    }
+  }, [pathname]);
+
   return (
-    <div className="w-1/5 flex">
+    <div className="w-1/4 flex">
       <div className="w-20 h-screen border-r border-gray-200 flex flex-col justify-between">
         <div>
           <img src={ImageAssets.Logo} alt="" />
         </div>
 
         <div className="flex flex-col items-center">
-          {state.topNavs.map((nav: any) => (
+          {NAVS.TOP_NAVS.map((nav: any) => (
             <div
               key={nav.id}
               className={`w-full h-full flex justify-center mb-4  ${
@@ -77,7 +132,7 @@ export default function NavBar() {
 
         <div className="flex justify-center mb-4">
           <IconButton onClick={handleOpenProfileMenu} size="small">
-            <Avatar>A</Avatar>
+            <Avatar alt={user?.profile?.realName} src={user?.profile?.avatar} />
           </IconButton>
 
           <Menu
@@ -87,7 +142,13 @@ export default function NavBar() {
             transformOrigin={{ horizontal: "left", vertical: "top" }}
             anchorOrigin={{ horizontal: "left", vertical: "top" }}
           >
-            <MenuItem disabled>Admin</MenuItem>
+            <MenuItem disabled>{user?.profile?.realName}</MenuItem>
+
+            <MenuItem disabled>Country: {user?.country || "None"}</MenuItem>
+
+            <MenuItem onClick={handleOpenSelectCountryDialog}>
+              Select country
+            </MenuItem>
 
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
@@ -99,8 +160,8 @@ export default function NavBar() {
         </div>
       </div>
 
-      <div className="w-full h-screen border-r border-gray-200 flex flex-col">
-        <div className="pt-4 pl-8">
+      <div className="w-full h-screen border-r border-gray-200 flex flex-col justify-between items-center">
+        <div className="pt-4 w-5/6">
           <div className="flex text-2xl font-semibold">
             {state.selectedNav?.title}
           </div>
@@ -125,7 +186,34 @@ export default function NavBar() {
             ))}
           </div>
         </div>
+
+        <div className="mb-4">
+          <div className="flex flex-col items-center rounded-md p-2 border-2 bg-slate-100">
+            <span className="text-xs text-gray-500">
+              Your team&apos;s balance
+            </span>
+            <span className="font-semibold">{teamPointBalance} points</span>
+          </div>
+
+          <div className="flex flex-col items-center rounded-md p-2 border-2 bg-slate-100 mt-4">
+            <span className="text-xs text-gray-500">Your balance</span>
+            <span className="font-semibold">{userPointBalance} points</span>
+          </div>
+
+          <div className="mt-4 flex justify-center">
+            <Button label="Redeem" onClick={handleRedeemRedirect} />
+          </div>
+        </div>
       </div>
+
+      {state.shouldShowSelectCountryDialog && (
+        <SelectCountryDialog
+          selectedCountry={user?.country}
+          open={state.shouldShowSelectCountryDialog}
+          onClose={handleCloseShouldShowSelectCountryDialog}
+          onSave={handleSaveCountry}
+        />
+      )}
     </div>
   );
 }

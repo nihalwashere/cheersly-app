@@ -1,7 +1,7 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import CampaignIcon from "@mui/icons-material/Campaign";
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+// import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+// import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -17,6 +17,10 @@ export const MESSAGE_SEVERITY = {
   INFO: "info",
 };
 
+export const DEFAULT_BASE_CURRENCY = "USD";
+
+export const DEFAULT_BASE_POINT_VALUE = 0.01;
+
 export const NAVS = {
   TOP_NAVS: [
     {
@@ -30,18 +34,13 @@ export const NAVS = {
           title: "Getting Started",
           route: "/getting-started",
         },
-        {
-          id: 2,
-          title: "Overview",
-          route: "/overview",
-        },
+        // {
+        //   id: 2,
+        //   title: "Overview",
+        //   route: "/overview",
+        // },
         {
           id: 3,
-          title: "Insights",
-          route: "/insights",
-        },
-        {
-          id: 4,
           title: "Activity",
           route: "/activity",
         },
@@ -65,49 +64,56 @@ export const NAVS = {
         },
       ],
     },
-    {
-      id: 3,
-      title: "Awards",
-      iconComponent: EmojiEventsIcon,
-      route: "/awards",
-      innerNavs: [
-        {
-          id: 1,
-          title: "Insights",
-          route: "/insights",
-        },
-        {
-          id: 2,
-          title: "Settings",
-          route: "/settings",
-        },
-      ],
-    },
-    {
-      id: 4,
-      title: "Rewards",
-      iconComponent: CardGiftcardIcon,
-      route: "/rewards",
-      innerNavs: [
-        {
-          id: 1,
-          title: "Insights",
-          route: "/insights",
-        },
-        {
-          id: 2,
-          title: "Catalog",
-          route: "/catalog",
-        },
-        {
-          id: 3,
-          title: "Settings",
-          route: "/settings",
-        },
-      ],
-    },
+    // {
+    //   id: 3,
+    //   title: "Awards",
+    //   iconComponent: EmojiEventsIcon,
+    //   route: "/awards",
+    //   innerNavs: [
+    //     {
+    //       id: 1,
+    //       title: "Insights",
+    //       route: "/insights",
+    //     },
+    //     {
+    //       id: 2,
+    //       title: "Settings",
+    //       route: "/settings",
+    //     },
+    //   ],
+    // },
+    // {
+    //   id: 4,
+    //   title: "Rewards",
+    //   iconComponent: CardGiftcardIcon,
+    //   route: "/rewards",
+    //   innerNavs: [
+    //     {
+    //       id: 1,
+    //       title: "Insights",
+    //       route: "/insights",
+    //     },
+    //     {
+    //       id: 2,
+    //       title: "Catalog",
+    //       route: "/catalog",
+    //     },
+    //     {
+    //       id: 3,
+    //       title: "Settings",
+    //       route: "/settings",
+    //     },
+    //   ],
+    // },
     {
       id: 5,
+      title: "Users",
+      iconComponent: PeopleAltIcon,
+      route: "/users",
+      innerNavs: [],
+    },
+    {
+      id: 6,
       title: "Billing",
       iconComponent: AttachMoneyIcon,
       route: "/billing",
@@ -130,32 +136,16 @@ export const NAVS = {
       ],
     },
     {
-      id: 6,
-      title: "Users",
-      iconComponent: PeopleAltIcon,
-      route: "/users",
-      innerNavs: [
-        {
-          id: 1,
-          title: "All Users",
-          route: "/all",
-        },
-      ],
-    },
-  ],
-  BOTTOM_NAVS: [
-    {
       id: 7,
       title: "Settings",
       iconComponent: SettingsIcon,
       route: "/settings",
-      innerNavs: [
-        {
-          id: 1,
-          title: "Team Settings",
-          route: "/team",
-        },
-      ],
+      innerNavs: [],
     },
   ],
+};
+
+export const VALUE_TYPE = {
+  FIXED_VALUE: "FIXED_VALUE",
+  VARIABLE_VALUE: "VARIABLE_VALUE",
 };

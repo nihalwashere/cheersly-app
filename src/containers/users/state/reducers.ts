@@ -1,8 +1,9 @@
+import { RESET_APP_STATE } from "../../global/state/types";
 import {
   SET_MESSAGE,
   SET_IS_LOADING,
-  RESET_APP_STATE,
   SET_USERS,
+  SET_USERS_PAGINATION_CONFIG,
 } from "./types";
 
 type UsersStateType = {
@@ -12,6 +13,9 @@ type UsersStateType = {
   };
   isLoading: boolean;
   users: Array<any>;
+  page: number;
+  rowsPerPage: number;
+  totalCount: number;
 };
 
 const initialState: UsersStateType = {
@@ -21,6 +25,9 @@ const initialState: UsersStateType = {
     value: "",
   },
   users: [],
+  page: 0,
+  rowsPerPage: 10,
+  totalCount: 0,
 };
 
 const authReducer = (state: UsersStateType = initialState, action: any) => {
@@ -36,6 +43,9 @@ const authReducer = (state: UsersStateType = initialState, action: any) => {
 
     case SET_USERS:
       return { ...state, users: action.payload };
+
+    case SET_USERS_PAGINATION_CONFIG:
+      return { ...state, ...action.payload };
 
     default:
       return { ...state };
