@@ -123,16 +123,16 @@ export const NAVS = {
           title: "Rewards",
           route: "/rewards",
         },
-        {
-          id: 2,
-          title: "Subscription",
-          route: "/subscription",
-        },
-        {
-          id: 3,
-          title: "Invoices",
-          route: "/invoices",
-        },
+        // {
+        //   id: 2,
+        //   title: "Subscription",
+        //   route: "/subscription",
+        // },
+        // {
+        //   id: 3,
+        //   title: "Invoices",
+        //   route: "/invoices",
+        // },
       ],
     },
     {

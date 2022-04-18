@@ -34,8 +34,8 @@ import RedeemGiftCardsContainer from "../redeem/gift-cards";
 
 // billing
 import BillingRewardsContainer from "../billing/rewards";
-import BillingSubscriptionContainer from "../billing/subscription";
-import BillingInvoicesContainer from "../billing/invoices";
+// import BillingSubscriptionContainer from "../billing/subscription";
+// import BillingInvoicesContainer from "../billing/invoices";
 
 // users
 import UsersContainer from "../users";
@@ -219,15 +219,16 @@ const RoutesContainer = () => {
                 }
               />
 
-              <Route
+              {/* <Route
                 path="/billing/subscription"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <BillingSubscriptionContainer />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
 
+              {/* 
               <Route
                 path="/billing/invoices"
                 element={
@@ -235,7 +236,7 @@ const RoutesContainer = () => {
                     <BillingInvoicesContainer />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
 
               {/* Users Routes */}
               <Route
