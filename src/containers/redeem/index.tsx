@@ -15,6 +15,8 @@ export default function Redeem() {
     (state: any) => state.redeem
   );
 
+  const { settings } = useSelector((state: any) => state.settings);
+
   const { user } = useSelector((state: any) => state.auth);
 
   const handleBrandSelect = (brandKey: string) => {
@@ -22,66 +24,84 @@ export default function Redeem() {
   };
 
   useEffect(() => {
-    dispatch(getCatalogsSaga({ country: user?.country }));
-  }, []);
+    if (user?.country) {
+      dispatch(getCatalogsSaga({ country: user.country }));
+    }
+  }, [user]);
 
   return (
     <div className="w-full">
-      <div className="text-xl font-semibold">Gift cards</div>
+      {message?.type && (
+        <Alert
+          severity={message.type}
+          message={message.value}
+          open={Object.keys(message).length ? true : false}
+          onClose={() => dispatch(setMessage({}))}
+        />
+      )}
+
+      <div className="flex justify-between items-center">
+        <div className="text-xl font-semibold">Gift cards</div>
+        <div className="mt-2 mb-2">
+          <span className="text-base">Your country:</span>{" "}
+          <span className="font-semibold">{user.country}</span>
+        </div>
+      </div>
 
       {isLoading ? (
         <div className="flex justify-center items-center">
           <Spinner loading={isLoading} />
         </div>
+      ) : !settings?.enableGiftCards ? (
+        <div className="flex flex-col justify-center items-center mt-20">
+          <span className="text-lg font-semibold">No rewards yet!</span>
+          <span>
+            Your team hasn&apos;t setup any rewards yet, check back soon!
+          </span>
+        </div>
       ) : (
         <div className="w-full">
-          {message?.type && (
-            <Alert
-              severity={message.type}
-              message={message.value}
-              open={Object.keys(message).length ? true : false}
-              onClose={() => dispatch(setMessage({}))}
-            />
-          )}
-
           {!user?.country && (
-            <div className="text-base">
-              You have not selected your residential country, until you do that
-              you cannot view gift cards.
+            <div className="flex flex-col justify-center items-center mt-20">
+              <span>
+                You have not selected your country, until you do that you cannot
+                view gift cards.
+              </span>
+              <span>
+                You can select your country from the bottom left menu by
+                clicking on your avatar.
+              </span>
             </div>
           )}
 
           {user?.country && (
-            <div>
-              <div className="mt-2 mb-2">
-                <span className="text-base">Your country:</span>{" "}
-                <span className="font-semibold">{user.country}</span>
-              </div>
-
-              <div className="grid grid-cols-4 gap-4 mt-10">
-                {catalogs.brands.map((brand: any) => (
+            <div className="grid grid-cols-4 gap-4 mt-10">
+              {catalogs.brands.map((brand: any) => (
+                <div className="mt-5">
                   <GiftCard
                     key={brand.brandKey}
                     brandName={brand.brandName}
                     brandImageUrl={brand.imageUrls["300w-326ppi"]}
                     onClick={() => handleBrandSelect(brand.brandKey)}
                   />
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           )}
 
-          <div className="mt-20">
-            <hr />
+          {user?.country && (
+            <div className="mt-20">
+              <hr />
 
-            <div className="mt-4 text-xs text-gray-400">
-              The merchants represented are not sponsors of the rewards or
-              otherwise affiliated with Cheersly Inc. The logos and other
-              identifying marks attached are trademarks of and owned by each
-              represented company and/or its affiliates. Please visit each
-              company&apos;s website for additional terms and conditions.
+              <div className="mt-4 text-xs text-gray-400">
+                The merchants represented are not sponsors of the rewards or
+                otherwise affiliated with Cheersly Inc. The logos and other
+                identifying marks attached are trademarks of and owned by each
+                represented company and/or its affiliates. Please visit each
+                company&apos;s website for additional terms and conditions.
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>

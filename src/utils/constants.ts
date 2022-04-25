@@ -45,6 +45,7 @@ export const NAVS = {
           route: "/activity",
         },
       ],
+      shouldShow: true,
     },
     {
       id: 2,
@@ -63,6 +64,7 @@ export const NAVS = {
           route: "/company-values",
         },
       ],
+      shouldShow: true,
     },
     // {
     //   id: 3,
@@ -111,6 +113,7 @@ export const NAVS = {
       iconComponent: PeopleAltIcon,
       route: "/users",
       innerNavs: [],
+      shouldShow: true,
     },
     {
       id: 6,
@@ -134,6 +137,7 @@ export const NAVS = {
         //   route: "/invoices",
         // },
       ],
+      shouldShow: true,
     },
     {
       id: 7,
@@ -141,6 +145,15 @@ export const NAVS = {
       iconComponent: SettingsIcon,
       route: "/settings",
       innerNavs: [],
+      shouldShow: true,
+    },
+    {
+      id: 8,
+      title: "Redeem",
+      iconComponent: null,
+      route: "/redeem",
+      innerNavs: [],
+      shouldShow: false,
     },
   ],
 };

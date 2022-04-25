@@ -23,7 +23,7 @@ export default function GettingStarted() {
       recognitionTeamCreated,
       companyValuesCreated,
       rewardRedemptionsEnabled,
-      appEnabled,
+      appLaunched,
       paymentMethodAdded,
     },
   } = useSelector((state: any) => state.dashboard);
@@ -147,7 +147,7 @@ export default function GettingStarted() {
                   onClick={handleOpenLaunchDialog}
                 >
                   <div className="mr-2">
-                    {appEnabled ? <CheckCircleIcon /> : <CircleIcon />}
+                    {appLaunched ? <CheckCircleIcon /> : <CircleIcon />}
                   </div>
                   <div>
                     <div className="text-base font-semibold">

@@ -16,14 +16,28 @@ import {
   setIsLoggedIn,
   setCurrentUser,
 } from "./actions";
+import { getTeamSettingsSaga } from "../../settings/state/actions"; // settings actions
 import { signup, login, validate } from "../../../api";
 import { CHEERSLY_TOKEN, MESSAGE_SEVERITY } from "../../../utils/constants";
+import { USER_ROLE } from "../../../enums/userRoles";
 
 const wrapUserProfile = (payload: any) => ({
   email: payload.slackUserData.profile?.email,
   realName: payload.slackUserData.profile.real_name,
   avatar: payload.slackUserData.profile.image_24,
 });
+
+function* appInit(): any {
+  try {
+    yield all([
+      yield put(getTeamPointBalanceSaga()),
+      yield put(getUserPointBalanceSaga()),
+      yield put(getTeamSettingsSaga()),
+    ]);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 function* signupHandler(action: any): any {
   try {
@@ -51,6 +65,7 @@ function* signupHandler(action: any): any {
             profile: wrapUserProfile(user),
           })
         ),
+        yield appInit(),
       ]);
 
       action.navigate("/dashboard/getting-started");
@@ -96,9 +111,14 @@ function* loginHandler(action: any): any {
             profile: wrapUserProfile(user),
           })
         ),
+        yield appInit(),
       ]);
 
-      action.navigate("/dashboard/getting-started");
+      if (user?.role === USER_ROLE.MEMBER) {
+        action.navigate("/redeem");
+      } else {
+        action.navigate("/dashboard/getting-started");
+      }
     } else {
       yield put(
         setMessage({
@@ -135,10 +155,10 @@ function* validateTokenHandler(): any {
             profile: wrapUserProfile(user),
           })
         ),
-        yield put(getTeamPointBalanceSaga()),
-        yield put(getUserPointBalanceSaga()),
+        yield appInit(),
       ]);
     } else {
+      localStorage.removeItem(CHEERSLY_TOKEN);
       window.location.href = "/";
     }
   } catch (error) {
@@ -152,7 +172,7 @@ function* logoutHandler(): any {
   try {
     localStorage.removeItem(CHEERSLY_TOKEN);
 
-    yield all([yield put(resetAppState())]);
+    yield put(resetAppState());
 
     window.location.href = "/login";
   } catch (error) {

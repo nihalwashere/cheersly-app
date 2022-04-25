@@ -22,6 +22,18 @@ export default function Activity() {
         </div>
       ) : (
         <div className="w-full">
+          {!activity.length && (
+            <div className="flex flex-col justify-center items-center mt-20">
+              <span className="text-lg font-semibold">
+                No activity available yet.
+              </span>
+              <span>
+                Activity will show up here when you start sharing cheers with
+                your peers within Slack.
+              </span>
+            </div>
+          )}
+
           {activity.map((elem: any) => (
             <div key={elem._id} className="p-4 flex items-center mt-4 card">
               <div>

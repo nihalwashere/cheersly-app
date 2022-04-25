@@ -121,6 +121,8 @@ function* createTeamHandler(action: any): any {
           })
         ),
       ]);
+
+      action.navigate(`/recognition/teams/${response?.data?.id}`);
     } else {
       yield put(
         setMessage({
@@ -185,6 +187,8 @@ function* deleteTeamHandler(action: any): any {
           })
         ),
       ]);
+
+      action.navigate("/recognition/teams");
     } else {
       yield put(
         setMessage({

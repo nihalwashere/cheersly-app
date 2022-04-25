@@ -14,6 +14,7 @@ type Props = {
   loading?: boolean;
   loadingPosition?: "start" | "end" | "center" | undefined;
   loaderButton?: boolean;
+  fullWidth?: boolean;
 };
 
 const StyledButton = styled(MuiButton)(({ theme }: any) => ({
@@ -40,6 +41,7 @@ export default function Button(props: Props) {
     loading,
     loadingPosition,
     loaderButton = false,
+    fullWidth = false,
   } = props;
 
   return (
@@ -53,6 +55,7 @@ export default function Button(props: Props) {
           disableElevation
           disabled={disabled}
           startIcon={startIcon}
+          fullWidth={fullWidth}
         >
           <span className={`${!color ? "text-white" : ""}`}>{label}</span>
         </StyledButton>
@@ -67,6 +70,7 @@ export default function Button(props: Props) {
           startIcon={startIcon}
           loading={loading}
           loadingPosition={loadingPosition}
+          fullWidth={fullWidth}
         >
           <span className={`${!color ? "text-white" : ""}`}>{label}</span>
         </StyledLoadingButton>

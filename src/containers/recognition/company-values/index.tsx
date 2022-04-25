@@ -115,6 +115,18 @@ export default function RecognitionCompanyValues() {
           </div>
 
           <div className="mt-10">
+            {!companyValues.length && (
+              <div className="flex flex-col justify-center items-center mt-20">
+                <span className="text-lg font-semibold">
+                  No company values available yet.
+                </span>
+                <span>
+                  Start supporting your company&apos;s vision and shape its
+                  culture by defining company values.
+                </span>
+              </div>
+            )}
+
             {companyValues.map((companyValue: any) => (
               <div
                 key={companyValue._id}

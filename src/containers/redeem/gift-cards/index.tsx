@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import MenuItem from "@mui/material/MenuItem";
+import InputAdornment from "@mui/material/InputAdornment";
 import Select from "../../../components/Select";
 import TextField from "../../../components/TextField";
 import Button from "../../../components/Button";
@@ -205,138 +206,147 @@ export default function GiftCards() {
   }, [brand]);
 
   return (
-    <div>
-      <div className="w-full">
-        <div className="text-xl mt-4">
-          <Breadcrumbs separator=">">
-            <div
-              onClick={() => navigate(-1)}
-              className="text-base underline cursor-pointer"
-            >
-              Gift cards
-            </div>
-          </Breadcrumbs>
-        </div>
+    <div className="w-full">
+      {message?.type && (
+        <Alert
+          severity={message.type}
+          message={message.value}
+          open={Object.keys(message).length ? true : false}
+          onClose={() => dispatch(setMessage({}))}
+        />
+      )}
 
-        {isLoading ? (
-          <div className="flex justify-center items-center">
-            <Spinner loading={isLoading} />
+      <div className="text-xl mt-4">
+        <Breadcrumbs separator=">">
+          <div
+            onClick={() => navigate(-1)}
+            className="text-base underline cursor-pointer"
+          >
+            Gift cards
           </div>
-        ) : (
-          <div className="w-full">
-            {message?.type && (
-              <Alert
-                severity={message.type}
-                message={message.value}
-                open={Object.keys(message).length ? true : false}
-                onClose={() => dispatch(setMessage({}))}
-              />
-            )}
+        </Breadcrumbs>
+      </div>
 
-            {brand?.brandKey && (
-              <div className="mt-5">
-                <div className="text-2xl font-semibold mb-2">
+      {isLoading ? (
+        <div className="flex justify-center items-center">
+          <Spinner loading={isLoading} />
+        </div>
+      ) : (
+        <div className="w-full">
+          {brand?.brandKey && (
+            <div className="mt-5">
+              <div className="flex items-center">
+                <span className="text-2xl font-semibold">
                   {brand.brandName}
-                </div>
+                </span>
 
-                <div className="flex">
-                  <img
-                    src={brand.imageUrls["300w-326ppi"]}
-                    alt={brand.brandKey}
-                  />
+                <span className="bg-gray-200 text-gray-600 text-[10px] rounded-md p-1 w-fit ml-4">
+                  DELIVERED BY EMAIL
+                </span>
+              </div>
 
-                  <div className="ml-10 flex flex-col w-2/5">
-                    <span className="text-lg">Redeem your points</span>
+              <div className="flex mt-4">
+                <img
+                  src={brand.imageUrls["300w-326ppi"]}
+                  alt={brand.brandKey}
+                />
 
-                    <div className="mt-2 mb-10">
-                      {state.items.length > 1 ? (
-                        <Select
+                <div className="ml-10 flex flex-col w-2/5">
+                  <span className="text-lg">Redeem your points</span>
+
+                  <div className="mt-2 mb-10">
+                    {state.items.length > 1 ? (
+                      <Select
+                        fullWidth
+                        variant="outlined"
+                        name="selectedUtid"
+                        value={state.selectedUtid}
+                        onChange={handleChangeItem}
+                      >
+                        {state.items.map((item: any) => (
+                          <MenuItem key={item.utid} value={item.utid}>
+                            {item.currencyCode} {item.faceValue} gift card for{" "}
+                            {getPointsInRewardCurrency(
+                              item.faceValue,
+                              item.currencyCode,
+                              exchangeRate.baseFx
+                            )}{" "}
+                            points
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    ) : (
+                      <div className="flex items-center">
+                        <TextField
                           fullWidth
                           variant="outlined"
-                          name="selectedUtid"
-                          value={state.selectedUtid}
-                          onChange={handleChangeItem}
-                        >
-                          {state.items.map((item: any) => (
-                            <MenuItem key={item.utid} value={item.utid}>
-                              {item.currencyCode} {item.faceValue} gift card for{" "}
-                              {getPointsInRewardCurrency(
-                                item.faceValue,
-                                item.currencyCode,
-                                exchangeRate.baseFx
-                              )}{" "}
-                              points
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      ) : (
-                        <div className="flex items-center">
-                          <TextField
-                            fullWidth
-                            variant="outlined"
-                            name="selectedFaceValue"
-                            value={state.selectedFaceValue}
-                            onChange={handleChangeFaceValue}
-                            required
-                            error={!!state?.errors?.selectedFaceValue}
-                          />
-
-                          <span className="ml-2 font-semibold">
-                            {state.currencyCode}
-                          </span>
-                        </div>
-                      )}
-
-                      {state?.errors?.selectedFaceValue && (
-                        <ErrorMessage
-                          message={state?.errors?.selectedFaceValue}
+                          name="selectedFaceValue"
+                          value={state.selectedFaceValue}
+                          onChange={handleChangeFaceValue}
+                          required
+                          error={!!state?.errors?.selectedFaceValue}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                {state.currencyCode}
+                              </InputAdornment>
+                            ),
+                          }}
+                          autoComplete="off"
                         />
-                      )}
-                    </div>
+                      </div>
+                    )}
 
-                    <Button
-                      label={`Redeem for ${points} points`}
-                      onClick={handleOpenShouldShowConfirmOrderDialog}
-                      disabled={shouldDisableRedeem()}
-                    />
-
-                    <span className="text-xs font-semibold text-red-600 mt-2">
-                      {teamPointBalance < points && userPointBalance < points
-                        ? "Your team and you do not have sufficient point balance"
-                        : teamPointBalance < points
-                        ? "Your team does not have sufficient point balance"
-                        : userPointBalance < points
-                        ? "You do not have sufficient point balance"
-                        : ""}
-                    </span>
+                    {state?.errors?.selectedFaceValue && (
+                      <ErrorMessage
+                        message={state?.errors?.selectedFaceValue}
+                      />
+                    )}
                   </div>
+
+                  <Button
+                    label={`Redeem for ${points} points`}
+                    onClick={handleOpenShouldShowConfirmOrderDialog}
+                    disabled={shouldDisableRedeem()}
+                    fullWidth
+                  />
+
+                  <span className="text-xs font-semibold text-red-600 mt-2">
+                    {teamPointBalance < points && userPointBalance < points
+                      ? "Your team and you do not have sufficient point balance"
+                      : teamPointBalance < points
+                      ? "Your team does not have sufficient point balance"
+                      : userPointBalance < points
+                      ? "You do not have sufficient point balance"
+                      : ""}
+                  </span>
                 </div>
+              </div>
+
+              <div
+                className="mt-4" // eslint-disable-next-line
+                dangerouslySetInnerHTML={{ __html: brand.shortDescription }}
+              />
+
+              <div className="mt-20">
+                <hr />
+              </div>
+
+              <div className="mt-4 text-xs text-gray-400">
+                <div
+                  // eslint-disable-next-line
+                  dangerouslySetInnerHTML={{ __html: brand.terms }}
+                />
 
                 <div
                   className="mt-4" // eslint-disable-next-line
-                  dangerouslySetInnerHTML={{ __html: brand.shortDescription }}
+                  dangerouslySetInnerHTML={{ __html: brand.disclaimer }}
                 />
-
-                <div className="mt-20">
-                  <hr />
-                </div>
-
-                <div className="mt-4 text-xs text-gray-400">
-                  <div
-                    // eslint-disable-next-line
-                    dangerouslySetInnerHTML={{ __html: brand.terms }}
-                  />
-
-                  <div
-                    className="mt-4" // eslint-disable-next-line
-                    dangerouslySetInnerHTML={{ __html: brand.disclaimer }}
-                  />
-                </div>
               </div>
-            )}
-          </div>
-        )}
-      </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {state.shouldShowConfirmOrderDialog && (
         <ConfirmOrderDialog

@@ -8,10 +8,11 @@ import { getAllUsers } from "../../api";
 type Props = {
   value: any;
   onChange: any;
+  error?: boolean;
 };
 
 export default function UserSearchBox(props: Props) {
-  const { value, onChange } = props;
+  const { value, onChange, error } = props;
 
   const [state, setState] = useMergeState({
     inputValue: "",
@@ -90,6 +91,7 @@ export default function UserSearchBox(props: Props) {
               </>
             ),
           }}
+          error={error}
         />
       )}
     />

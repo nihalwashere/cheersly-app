@@ -16,7 +16,7 @@ type DashboardStateType = {
     recognitionTeamCreated: boolean;
     companyValuesCreated: boolean;
     rewardRedemptionsEnabled: boolean;
-    appEnabled: boolean;
+    appLaunched: boolean;
     paymentMethodAdded: boolean;
   };
   activity: Array<any>;
@@ -32,7 +32,7 @@ const initialState: DashboardStateType = {
     recognitionTeamCreated: false,
     companyValuesCreated: false,
     rewardRedemptionsEnabled: false,
-    appEnabled: false,
+    appLaunched: false,
     paymentMethodAdded: false,
   },
   activity: [],

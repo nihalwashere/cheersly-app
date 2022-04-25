@@ -62,9 +62,10 @@ export const getTeamDetailsSaga = (id: string) => ({
   id,
 });
 
-export const createTeamSaga = (payload: any) => ({
+export const createTeamSaga = (payload: any, navigate: any) => ({
   type: CREATE_TEAM_SAGA,
   payload,
+  navigate,
 });
 
 export const updateTeamSaga = (id: string, payload: any) => ({
@@ -73,9 +74,10 @@ export const updateTeamSaga = (id: string, payload: any) => ({
   payload,
 });
 
-export const deleteTeamSaga = (id: string) => ({
+export const deleteTeamSaga = (id: string, navigate: any) => ({
   type: DELETE_TEAM_SAGA,
   id,
+  navigate,
 });
 
 export const getCompanyValuesSaga = () => ({

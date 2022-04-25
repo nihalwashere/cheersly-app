@@ -31,7 +31,7 @@ export default function Teams() {
   };
 
   const handleCreateTeam = (payload: any) => {
-    dispatch(createTeamSaga(payload));
+    dispatch(createTeamSaga(payload, navigate));
     handleCloseCreateTeamDialog();
   };
 
@@ -41,6 +41,10 @@ export default function Teams() {
 
   useEffect(() => {
     dispatch(getAllTeamsSaga());
+
+    return () => {
+      dispatch(setMessage({}));
+    };
   }, []);
 
   return (
@@ -65,6 +69,19 @@ export default function Teams() {
           <div className="w-full flex justify-end">
             <Button label="Create team" onClick={handleOpenCreateTeamDialog} />
           </div>
+
+          {!teams.length && (
+            <div className="flex flex-col justify-center items-center mt-20">
+              <span className="text-lg font-semibold">
+                No recognition teams available yet.
+              </span>
+              <span className="w-3/4 text-center">
+                Create recognition team&apos;s, allocate monthly point allowance
+                and setup a dedicated Slack channel so that you can start
+                sharing cheers with your peers!{" "}
+              </span>
+            </div>
+          )}
 
           <div className="grid grid-cols-4 gap-4 mt-10">
             {teams.map((team: any) => (

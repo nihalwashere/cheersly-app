@@ -98,7 +98,7 @@ export default function Settings() {
         />
       )}
 
-      <div className="text-xl font-semibold">Team Settings</div>
+      <div className="text-xl font-semibold">Team settings</div>
 
       {isLoading ? (
         <div className="flex justify-center items-center">

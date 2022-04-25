@@ -15,7 +15,7 @@ export default function GiftCard(props: Props) {
       onClick={onClick}
     >
       <img src={brandImageUrl} alt={brandName} />
-      <div className="font-medium">{brandName}</div>
+      <span className="mt-1">{brandName}</span>
     </div>
   );
 }

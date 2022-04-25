@@ -60,15 +60,31 @@ export default function TeamDetails() {
         id: event.target.value.id,
         name: event.target.value.name,
       },
+      errors: {
+        ...state.errors,
+        channel: false,
+      },
     });
   };
 
   const handlePointAmountOptionsChange = (pointAmountOptions: any) => {
-    setState({ pointAmountOptions });
+    setState({
+      pointAmountOptions,
+      errors: {
+        ...state.errors,
+        pointAmountOptions: false,
+      },
+    });
   };
 
   const handleManagersChange = (managers: any) => {
-    setState({ managers });
+    setState({
+      managers,
+      errors: {
+        ...state.errors,
+        managers: false,
+      },
+    });
   };
 
   const isFormValid = () => {
@@ -81,7 +97,7 @@ export default function TeamDetails() {
       isValid = false;
     }
 
-    if (!state.channel) {
+    if (!state.channel?.id) {
       payload = { ...payload, channel: true };
       isValid = false;
     }
@@ -146,7 +162,7 @@ export default function TeamDetails() {
 
   const handleDelete = () => {
     if (teamId) {
-      dispatch(deleteTeamSaga(teamId));
+      dispatch(deleteTeamSaga(teamId, navigate));
     }
   };
 
@@ -248,6 +264,7 @@ export default function TeamDetails() {
                     value={state.channel}
                     renderValue={(value: any) => value.name}
                     onChange={handleChannelChange}
+                    error={state?.errors?.channel}
                   >
                     {slackChannels.map((item: any) => (
                       <MenuItem key={item.id} value={item}>
@@ -313,9 +330,20 @@ export default function TeamDetails() {
                         InputProps={{
                           ...params.InputProps,
                         }}
+                        type="number"
+                        error={state?.errors?.pointAmountOptions}
                       />
                     )}
                   />
+
+                  <span className="text-xs text-gray-400">
+                    Add a point amount option and hit enter, for example 10, 20,
+                    30, 50, etc.
+                  </span>
+
+                  {state?.errors?.pointAmountOptions && (
+                    <ErrorMessage message="Atleast one point amount option is required" />
+                  )}
                 </div>
               </div>
 
@@ -331,7 +359,12 @@ export default function TeamDetails() {
                   <UserSearchBox
                     value={state.managers}
                     onChange={handleManagersChange}
+                    error={state?.errors?.managers}
                   />
+
+                  {state?.errors?.managers && (
+                    <ErrorMessage message="Atleast one manager is required" />
+                  )}
                 </div>
               </div>
 

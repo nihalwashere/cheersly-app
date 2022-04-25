@@ -117,32 +117,36 @@ export default function Settings() {
             </div>
           </div>
 
-          <div className="mt-10">
-            <div className="font-semibold">Previous top-ups</div>
+          {!!pointTopUps?.length && (
+            <div className="mt-10">
+              <div className="font-semibold">Previous top-ups</div>
 
-            <div className="mt-4">
-              {pointTopUps.map((elem: any) => (
-                <div
-                  key={elem._id}
-                  className="p-2 card flex justify-between items-center mb-4"
-                >
-                  <div className="text-base">
-                    <span className="font-semibold">·</span> Top up of{" "}
-                    <span className="font-semibold">{elem.points} points</span>{" "}
-                    on {formatDate(elem.createdAt, "lll")}
-                  </div>
-                  {/* eslint-disable-next-line */}
-                  <Link
-                    component="button"
-                    variant="body2"
-                    onClick={() => handleOpenTopUpDetailsDialog(elem)}
+              <div className="mt-4">
+                {pointTopUps.map((elem: any) => (
+                  <div
+                    key={elem._id}
+                    className="p-2 card flex justify-between items-center mb-4"
                   >
-                    View details
-                  </Link>
-                </div>
-              ))}
+                    <div className="text-base">
+                      <span className="font-semibold">·</span> Top up of{" "}
+                      <span className="font-semibold">
+                        {elem.points} points
+                      </span>{" "}
+                      on {formatDate(elem.createdAt, "lll")}
+                    </div>
+                    {/* eslint-disable-next-line */}
+                    <Link
+                      component="button"
+                      variant="body2"
+                      onClick={() => handleOpenTopUpDetailsDialog(elem)}
+                    >
+                      View details
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {topUpDialogConfig?.open && (
             <TopUpPointsDialog

@@ -15,6 +15,8 @@ type SettingsStateType = {
     inactivityReminders: boolean | null;
     pointsAvailableToRedeem: boolean | null;
     requireCompanyValues: boolean | null;
+    enableSharingGiphys: boolean | null;
+    enableGiftCards: boolean | null;
   };
 };
 
@@ -32,6 +34,8 @@ const initialState: SettingsStateType = {
     inactivityReminders: null,
     pointsAvailableToRedeem: null,
     requireCompanyValues: null,
+    enableSharingGiphys: null,
+    enableGiftCards: null,
   },
 };
 

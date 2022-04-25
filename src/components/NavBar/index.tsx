@@ -15,6 +15,7 @@ import { NAVS } from "../../utils/constants";
 import { logoutSaga } from "../../containers/auth/state/actions";
 import { updateCountryForUserSaga } from "../../containers/users/state/actions"; // user actions
 import ImageAssets from "../../assets/images";
+import { USER_ROLE } from "../../enums/userRoles";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export default function NavBar() {
   );
 
   const [state, setState] = useMergeState({
+    navs: NAVS.TOP_NAVS.filter((nav) => nav.shouldShow),
     selectedNav: NAVS.TOP_NAVS[0],
     selectedInnerNav: NAVS.TOP_NAVS[0].innerNavs[0],
     profileMenuAnchorEl: null,
@@ -79,9 +81,16 @@ export default function NavBar() {
 
   const handleSaveCountry = (payload: any) => {
     dispatch(updateCountryForUserSaga(payload));
-
     handleCloseShouldShowSelectCountryDialog();
   };
+
+  useEffect(() => {
+    if (user?.role && user?.role === USER_ROLE.MEMBER) {
+      // members can only access gift cards
+      setState({ navs: [] });
+      navigate("/redeem");
+    }
+  }, [user]);
 
   useEffect(() => {
     const mainNav = pathname.split("/")[1];
@@ -112,7 +121,7 @@ export default function NavBar() {
         </div>
 
         <div className="flex flex-col items-center">
-          {NAVS.TOP_NAVS.map((nav: any) => (
+          {state.navs.map((nav: any) => (
             <div
               key={nav.id}
               className={`w-full h-full flex justify-center mb-4  ${
@@ -122,9 +131,11 @@ export default function NavBar() {
               }`}
             >
               <Tooltip title={nav.title} placement="right">
-                <IconButton onClick={() => handleNavChange(nav)}>
-                  <nav.iconComponent />
-                </IconButton>
+                {nav?.iconComponent && (
+                  <IconButton onClick={() => handleNavChange(nav)}>
+                    <nav.iconComponent />
+                  </IconButton>
+                )}
               </Tooltip>
             </div>
           ))}
@@ -200,9 +211,11 @@ export default function NavBar() {
             <span className="font-semibold">{userPointBalance} points</span>
           </div>
 
-          <div className="mt-4 flex justify-center">
-            <Button label="Redeem" onClick={handleRedeemRedirect} />
-          </div>
+          {user?.role === USER_ROLE.ADMIN && (
+            <div className="mt-4 flex justify-center">
+              <Button label="Redeem" onClick={handleRedeemRedirect} />
+            </div>
+          )}
         </div>
       </div>
 

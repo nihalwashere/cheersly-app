@@ -12,6 +12,7 @@ import {
 import { getAllUsersStats, updateUserCountry } from "../../../api";
 import { MESSAGE_SEVERITY } from "../../../utils/constants";
 import { setCurrentUser } from "../../auth/state/actions"; // auth actions
+import { getCatalogsSaga } from "../../redeem/state/actions"; // redeem actions
 
 function* getAllUsersStatsHandler(action: any): any {
   try {
@@ -53,19 +54,22 @@ function* updateCountryForUserHandler(action: any): any {
         data: { user },
       } = response;
 
-      yield put(
-        setCurrentUser({
-          role: user.role,
-          country: user.country,
-          id: user.slackUserData.id,
-          teamId: user.slackUserData.team_id,
-          profile: {
-            email: user.slackUserData.profile?.email || "",
-            realName: user.slackUserData.profile.real_name,
-            avatar: user.slackUserData.profile.image_24,
-          },
-        })
-      );
+      yield all([
+        yield put(
+          setCurrentUser({
+            role: user.role,
+            country: user.country,
+            id: user.slackUserData.id,
+            teamId: user.slackUserData.team_id,
+            profile: {
+              email: user.slackUserData.profile?.email || "",
+              realName: user.slackUserData.profile.real_name,
+              avatar: user.slackUserData.profile.image_24,
+            },
+          })
+        ),
+        yield put(getCatalogsSaga({ country: user.country })),
+      ]);
     } else {
       yield put(
         setMessage({
