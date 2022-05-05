@@ -81,9 +81,8 @@ const CreateRewardDialog = (props) => {
   //   MAX_REWARD_DESCRIPTION_LENGTH
   // );
   const [titleValidationError, setTitleValidationError] = useState(false);
-  const [descriptionValidationError, setDescriptionValidationError] = useState(
-    false
-  );
+  const [descriptionValidationError, setDescriptionValidationError] =
+    useState(false);
   const [priceValidationError, setPriceValidationError] = useState(false);
 
   const handleTitle = (event) => {

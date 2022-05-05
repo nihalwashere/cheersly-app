@@ -40,15 +40,11 @@ const RewardsOverviewContainer = () => {
 
   const [selectedReward, setSelectedReward] = useState({});
 
-  const [
-    shouldShowCreateRewardDialog,
-    setShouldShowCreateRewardDialog,
-  ] = useState(false);
+  const [shouldShowCreateRewardDialog, setShouldShowCreateRewardDialog] =
+    useState(false);
 
-  const [
-    shouldShowDeleteRewardDialog,
-    setShouldShowDeleteRewardDialog,
-  ] = useState(false);
+  const [shouldShowDeleteRewardDialog, setShouldShowDeleteRewardDialog] =
+    useState(false);
 
   const handleRewardCreate = () => {
     setShouldShowCreateRewardDialog(true);

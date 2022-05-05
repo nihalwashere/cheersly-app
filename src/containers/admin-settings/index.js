@@ -54,13 +54,8 @@ const AdminSettingsContainer = () => {
 
   const dispatch = useDispatch();
 
-  const {
-    adminSettings,
-    isLoading,
-    page,
-    rowsPerPage,
-    totalCount,
-  } = useSelector((state) => state.adminSettings);
+  const { adminSettings, isLoading, page, rowsPerPage, totalCount } =
+    useSelector((state) => state.adminSettings);
 
   const handleChangePage = (event, newPage) => {
     dispatch(setPage(newPage));
