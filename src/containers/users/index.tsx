@@ -88,7 +88,7 @@ export default function Users() {
                       </div>
                     </TableCell>
                     <TableCell component="th" scope="row" align="right">
-                      {user?.cheersRedeemable} points
+                      {user?.cheersRedeemable || 0} points
                     </TableCell>
                   </TableRow>
                 ))}

@@ -42,10 +42,12 @@ export default function Redeem() {
 
       <div className="flex justify-between items-center">
         <div className="text-xl font-semibold">Gift cards</div>
-        <div className="mt-2 mb-2">
-          <span className="text-base">Your country:</span>{" "}
-          <span className="font-semibold">{user.country}</span>
-        </div>
+        {user?.country && (
+          <div className="mt-2 mb-2">
+            <span className="text-base">Your country:</span>{" "}
+            <span className="font-semibold">{user.country}</span>
+          </div>
+        )}
       </div>
 
       {isLoading ? (
