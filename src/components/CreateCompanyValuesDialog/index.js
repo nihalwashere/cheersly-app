@@ -80,9 +80,8 @@ const CreateCompanyValuesDialog = (props) => {
     MAX_COMPANY_VALUE_DESCRIPTION_LENGTH
   );
   const [titleValidationError, setTitleValidationError] = useState(false);
-  const [descriptionValidationError, setDescriptionValidationError] = useState(
-    false
-  );
+  const [descriptionValidationError, setDescriptionValidationError] =
+    useState(false);
 
   const handleTitle = (event) => {
     if (titleValidationError) {
@@ -143,10 +142,8 @@ const CreateCompanyValuesDialog = (props) => {
 
   useEffect(() => {
     if (isEditMode) {
-      const {
-        title: newTitle,
-        description: newDescription,
-      } = selectedCompanyValue;
+      const { title: newTitle, description: newDescription } =
+        selectedCompanyValue;
 
       if (!title || title !== newTitle) {
         setTitle(newTitle);

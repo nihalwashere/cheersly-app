@@ -1,9 +1,8 @@
 // -------------------- PRODUCTION ---------------------
 
-export const CHEERSLY_API_BASE_URL_V1 = "https://cheersly.herokuapp.com/api/v1"; // prod
+export const CHEERSLY_API_BASE_URL_V1 = "https://api.cheersly.club/api/v1"; // prod
 
-export const CHEERSLY_GRAPHQL_BASE_URL =
-  "https://cheersly.herokuapp.com/graphql"; // prod
+export const CHEERSLY_GRAPHQL_BASE_URL = "https://api.cheersly.club/graphql"; // prod
 
 export const SLACK_CLIENT_ID = "965550414273.1557391535763"; // prod
 
