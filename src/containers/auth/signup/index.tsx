@@ -54,7 +54,7 @@ export default function SignUp() {
         </div> */}
 
         <div className="mt-10 flex justify-center">
-          <a href={process.env.REACT_APP_SLACK_SIGNUP_URL} className="disabled">
+          <a href={process.env.REACT_APP_SLACK_SIGNUP_URL}>
             <img
               alt="Add to Slack"
               height="40"
