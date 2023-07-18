@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CHEERSLY_SUPPORT_EMAIL } from "../../../utils/constants";
 import ImageAssets from "../../../assets/images";
 
 export default function Login() {
@@ -38,13 +37,6 @@ export default function Login() {
           <Link to="/signup" className="underline">
             Sign up
           </Link>
-        </div>
-
-        <div className="mt-10">
-          Having trouble signing in? Contact{" "}
-          <a href={`mailto:${CHEERSLY_SUPPORT_EMAIL}`} className="underline">
-            {CHEERSLY_SUPPORT_EMAIL}
-          </a>
         </div>
       </div>
     </div>
