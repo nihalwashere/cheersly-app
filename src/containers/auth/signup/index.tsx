@@ -16,10 +16,6 @@ export default function SignUp() {
   //   setTosChecked(event.target.checked);
   // };
 
-  const redirectOauth = () => {
-    window.location.href = process.env.REACT_APP_SLACK_SIGNUP_URL || "";
-  };
-
   return (
     <div className="flex h-screen w-full bg-yellow-extra-light">
       <div className="w-1/2 flex flex-col items-center justify-center">
@@ -57,14 +53,16 @@ export default function SignUp() {
           </div>
         </div> */}
 
-        <div className="mt-10 flex justify-center" onClick={redirectOauth}>
-          <img
-            alt="Add to Slack"
-            height="40"
-            width="139"
-            src="https://platform.slack-edge.com/img/add_to_slack.png"
-            srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
-          />
+        <div className="mt-10 flex justify-center">
+          <a href={process.env.REACT_APP_SLACK_SIGNUP_URL}>
+            <img
+              alt="Add to Slack"
+              height="40"
+              width="139"
+              src="https://platform.slack-edge.com/img/add_to_slack.png"
+              srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
+            />
+          </a>
         </div>
 
         <div className="mt-10">
